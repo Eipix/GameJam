@@ -1,14 +1,11 @@
 using DG.Tweening;
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Jumping : SerializedMonoBehaviour
+public class Jumping : MonoBehaviour
 {
-    [OdinSerialize, ProgressBar(0.01f, 10f)]
+    [SerializeField, Range(0.01f, 10f)]
     private float _jumpPower = 1f;
-    [OdinSerialize] private float _duration = 3f;
+    [SerializeField] private float _duration = 3f;
 
     private Tween _jumping;
     private Vector3 _defaultPosition;
@@ -29,7 +26,6 @@ public class Jumping : SerializedMonoBehaviour
         Restart();
     }
 
-    [Button]
     private void Restart()
     {
         Kill();
@@ -37,6 +33,5 @@ public class Jumping : SerializedMonoBehaviour
         _jumping = transform.DOJump(transform.position, _jumpPower, _numJumps, _duration).SetLoops(-1, LoopType.Restart);
     }
 
-    [Button]
     private void Kill() =>_jumping?.Kill();
 }
