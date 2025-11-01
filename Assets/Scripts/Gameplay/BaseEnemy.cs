@@ -134,7 +134,6 @@ namespace Gameplay
 
         void HandleDeath()
         {
-            // TODO  судя по всему drop мешает врагам ходить
             ItemFactory.Instance.TrySpawnRandom(transform.position, out Item item);
 
             Destroy(gameObject);
