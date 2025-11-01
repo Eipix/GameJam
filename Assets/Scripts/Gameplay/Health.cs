@@ -21,6 +21,7 @@ namespace Gameplay
         public event DeathEventHandler OnDie;
 
         public float CurrentHealth { get; private set; }
+        public bool Invincibility { get; set; }
 
         bool _isDead;
 
@@ -45,6 +46,9 @@ namespace Gameplay
 
         public void TakeDamage(float damage, GameObject damageSource)
         {
+            if (Invincibility)
+                return;
+
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, MaxHealth);
             //Debug.Log(CurrentHealth);

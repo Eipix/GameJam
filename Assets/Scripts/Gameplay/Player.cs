@@ -6,6 +6,8 @@ namespace Gameplay
     [RequireComponent(typeof(CharacterController), typeof(SpriteRenderer))]
     public class Player : MonoBehaviour
     {
+        public readonly float DefaultSpeed = 5f;
+
         [Header("Movement Settings")] [SerializeField]
         private float moveSpeed = 5f;
 
@@ -17,6 +19,8 @@ namespace Gameplay
         private SpriteRenderer _spriteRenderer;
     
         private Vector3 velocity;
+
+        public float Speed => moveSpeed;
     
         void Start()
         {
@@ -33,6 +37,11 @@ namespace Gameplay
         {
             ApplyGravity();
             HandleMovement();
+        }
+
+        public void ChangeSpeed(float speed)
+        {
+            moveSpeed += speed;
         }
 
         private void HandleMovement()
