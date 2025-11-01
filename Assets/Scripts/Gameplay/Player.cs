@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 namespace Gameplay
 {
     [RequireComponent(typeof(CharacterController), typeof(SpriteRenderer))]
