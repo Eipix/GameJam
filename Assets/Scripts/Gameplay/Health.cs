@@ -47,7 +47,7 @@ namespace Gameplay
         {
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, MaxHealth);
-            Debug.Log(CurrentHealth);
+            //Debug.Log(CurrentHealth);
             OnDamaged?.Invoke(damage, damageSource);
             
             HandleDeath();
@@ -73,7 +73,6 @@ namespace Gameplay
             {
                 _isDead = true;
                 OnDie?.Invoke();
-                Destroy(gameObject);
             }
         }
     }

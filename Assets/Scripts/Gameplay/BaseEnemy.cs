@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,12 +28,7 @@ namespace Gameplay
         private Vector3 _lastPosition;
         private float _lastAttackTime;
 
-        void Start()
-        {
-            Init();
-        }
-
-        void Init()
+        private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _health = GetComponent<Health>();
@@ -45,6 +41,11 @@ namespace Gameplay
 
             _health.OnDie += HandleDeath;
             _lastPosition = transform.position;
+        }
+
+        public void Init(Transform character)
+        {
+            target = character;
         }
 
         void Update()
@@ -101,6 +102,7 @@ namespace Gameplay
 
         void HandleDeath()
         {
+            Destroy(gameObject);
             _navMeshAgent.enabled = false;
             enabled = false;
         }

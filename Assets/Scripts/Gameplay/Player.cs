@@ -60,9 +60,9 @@ namespace Gameplay
         private void FlipSprite(float horizontal)
         {
             if (horizontal > 0)
-                _spriteRenderer.flipX = false;
-            else if (horizontal < 0)
                 _spriteRenderer.flipX = true;
+            else if (horizontal < 0)
+                _spriteRenderer.flipX = false;
         }
     }
 }
