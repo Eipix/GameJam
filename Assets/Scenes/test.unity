@@ -648,8 +648,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemPrefabs:
-  - _item: {fileID: 2837629225207424922, guid: ee574c5be4940be4d9d255801dddaca4, type: 3}
-    _chance: 9.8
   - _item: {fileID: 6277645195241741874, guid: 9151a1396ced2824d889a7180df0e3fb, type: 3}
     _chance: 9.8
   - _item: {fileID: 3507595236571305394, guid: edba47e0ce891244faa66921ed8bc272, type: 3}
