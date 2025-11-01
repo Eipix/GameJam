@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Common;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Gameplay
 {
@@ -10,7 +11,7 @@ namespace Gameplay
         [System.Serializable]
         public class Wave
         {
-            public GameObject enemyPrefab;
+            [FormerlySerializedAs("enemyPrefab")] public List<Enemy> enemyPrefabs;
             public int maxEnemies;
         }
 
@@ -23,7 +24,7 @@ namespace Gameplay
 
         private int currentWaveIndex = 0;
         private int enemiesSpawnedInWave = 0;
-        private List<GameObject> activeEnemies = new List<GameObject>();
+        private List<Enemy> activeEnemies = new List<Enemy>();
 
         private void Start()
         {
@@ -38,7 +39,7 @@ namespace Gameplay
             }
         }
 
-        public void OnEnemyDeath(GameObject enemy)
+        public void OnEnemyDeath(Enemy enemy)
         {
             if (activeEnemies.Contains(enemy))
             {
@@ -66,12 +67,12 @@ namespace Gameplay
             Vector3 spawnPosition;
             if (FindValidSpawnPosition(out spawnPosition))
             {
-                GameObject enemy = Instantiate(currentWave.enemyPrefab, spawnPosition, Quaternion.identity);
+                Enemy enemy = Instantiate(GetRandomEnemyFromWave(currentWave), spawnPosition, Quaternion.identity);
+                enemy.Init(player);
                 activeEnemies.Add(enemy);
                 enemiesSpawnedInWave++;
 
                 Health health = enemy.GetComponent<Health>();
-                enemy.GetComponent<Enemy>().Init(player);
                 health.OnDie += () => OnEnemyDeath(enemy);
             
             }
@@ -104,6 +105,12 @@ namespace Gameplay
             return false;
         }
 
+        private Enemy GetRandomEnemyFromWave(Wave wave)
+        {
+            int index = Random.Range(0, wave.enemyPrefabs.Count);
+            return wave.enemyPrefabs[index];
+        }
+        
         private void NextWave()
         {
             currentWaveIndex++;

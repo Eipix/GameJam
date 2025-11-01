@@ -612,7 +612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemyPrefab: {fileID: 5856722061309123090, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
+  - enemyPrefabs:
+    - {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
     maxEnemies: 30
   maxActiveEnemies: 15
   spawnDistanceMin: 10
