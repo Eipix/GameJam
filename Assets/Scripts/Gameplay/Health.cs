@@ -73,6 +73,7 @@ namespace Gameplay
             {
                 _isDead = true;
                 OnDie?.Invoke();
+                Destroy(gameObject);
             }
         }
     }
