@@ -4,11 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public abstract class Item : MonoBehaviour
 {
-    [SerializeField, Range(0, 100f)] private float _dropChance;
-
     private Collider _collider;
-
-    public float DropChance => _dropChance;
 
     private void Awake()
     {
