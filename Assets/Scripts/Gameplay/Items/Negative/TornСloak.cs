@@ -12,6 +12,8 @@ public class TornCloak : Item
         if (player.TryGetComponent(out Health health) is false)
             throw new InvalidOperationException($"Игрок должен содержать компонент {nameof(Health)}");
 
+        OnPicked();
+
         float speedBonus = player.DefaultSpeed * _slowdownMultiplier;
 
         Sequence sequence = DOTween.Sequence();

@@ -3,7 +3,7 @@ using System;
 
 public class PosionBottle : Item
 {
-    private readonly float _multiplier = 0.9f;
+    private readonly float _multiplier = 0.1f;
 
     protected override void OnPlayerEnter(Player player)
     {
@@ -12,7 +12,9 @@ public class PosionBottle : Item
 
         OnPicked();
 
-        health.Heal(health.CurrentHealth * _multiplier);
+        float damage = health.CurrentHealth * _multiplier;
+
+        health.TakeDamage(damage, gameObject);
         Destroy(gameObject);
     }
 }

@@ -1,9 +1,10 @@
 using Gameplay;
 using System;
+using UnityEngine;
 
 public class BloodBottle : Item
 {
-    private readonly float _multiplier = 1.1f;
+    private readonly float _multiplier = 0.1f;
 
     protected override void OnPlayerEnter(Player player)
     {
