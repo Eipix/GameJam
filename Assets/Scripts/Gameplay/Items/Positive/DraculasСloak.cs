@@ -2,7 +2,7 @@ using DG.Tweening;
 using Gameplay;
 using System;
 
-public class DraculasСloak : Item
+public class DraculasCloak : Item
 {
     private readonly float _speedMultiplier = 2f;
     private readonly float _invincibilityAndSpeedDuration = 5f;
@@ -10,7 +10,7 @@ public class DraculasСloak : Item
     protected override void OnPlayerEnter(Player player)
     {
         if (player.TryGetComponent(out Health health) is false)
-            throw new InvalidOperationException($"Игрок должен содержать компонент {nameof(Health)}");
+            throw new InvalidOperationException($"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ {nameof(Health)}");
 
         OnPicked();
 

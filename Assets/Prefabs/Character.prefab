@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 8146935202894029624}
   - component: {fileID: 236175046002978611}
   - component: {fileID: 8431282675068835095}
-  - component: {fileID: 3125982473578422807}
   - component: {fileID: 6585648243846794744}
   m_Layer: 0
   m_Name: Character
@@ -222,29 +221,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &3125982473578422807
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6153098035238629008}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.2886262
-  m_Height: 1.4716667
-  m_Direction: 1
-  m_Center: {x: 0.32470715, y: 0, z: 0}
 --- !u!114 &6585648243846794744
 MonoBehaviour:
   m_ObjectHideFlags: 0

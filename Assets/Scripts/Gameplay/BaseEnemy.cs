@@ -1,12 +1,13 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Gameplay
 {
     [RequireComponent(
         typeof(NavMeshAgent),
-        typeof(Health),
-        typeof(SpriteRenderer))]
+        typeof(Health))]
     public class Enemy : MonoBehaviour
     {
         [Header("Movement Settings")]
@@ -18,26 +19,39 @@ namespace Gameplay
         [SerializeField] private float attackRange = 2f;
         [SerializeField] private float attackCooldown = 1f;
 
+        [Header("Attack Animation")]
+        [SerializeField] private float attackTiltAngle = 30f;
+        [SerializeField] private float attackDuration = 0.15f;
+        [SerializeField] private float returnDuration = 0.15f;
+
+        
         [Header("Target")]
         [SerializeField] private Transform target;
-
+        
+        [Header("Components")]
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        
         private NavMeshAgent _navMeshAgent;
         private Health _health;
-        private SpriteRenderer _spriteRenderer;
         private Vector3 _lastPosition;
         private float _lastAttackTime;
 
+        private Sequence _attackSequence;
+        
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _health = GetComponent<Health>();
-            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            
 
             _navMeshAgent.updateRotation = false;
-            _navMeshAgent.updateUpAxis = false;
+            _navMeshAgent.updateUpAxis = true;
             _navMeshAgent.speed = moveSpeed;
             _navMeshAgent.stoppingDistance = stoppingDistance;
-
+            _navMeshAgent.baseOffset = 1f;
+            
+            //_navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+            
             _health.OnDie += HandleDeath;
             _lastPosition = transform.position;
         }
@@ -49,13 +63,14 @@ namespace Gameplay
 
         void Update()
         {
-            if (!target || !_navMeshAgent.isActiveAndEnabled) 
+            if (!_navMeshAgent.isActiveAndEnabled) 
                 return;
             
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
             if (distanceToTarget <= attackRange)
             {
+                _navMeshAgent.SetDestination(transform.position);
                 TryAttack();
             }
             else
@@ -70,7 +85,7 @@ namespace Gameplay
         {
             if (Time.time >= _lastAttackTime + attackCooldown)
             {
-                Attack();
+                PlayAttackAnimation();
                 
                 _lastAttackTime = Time.time;
             }
@@ -78,29 +93,48 @@ namespace Gameplay
 
         void Attack()
         {
-            if (!target) 
-                return;
-
             if (target.TryGetComponent<Health>(out var health))
             {
                 health.TakeDamage(attackDamage, gameObject);
             }
         }
 
+        void PlayAttackAnimation()
+        {
+            _attackSequence?.Kill();
+
+            float direction = spriteRenderer.flipX ? 1f : -1f;
+            float attackAngle = attackTiltAngle * direction;
+
+            _attackSequence = DOTween.Sequence();
+            
+            _attackSequence.Append(
+                spriteRenderer.transform.DORotate(new Vector3(0, 0, attackAngle), attackDuration)
+                    .SetEase(Ease.OutBack)
+            );
+            _attackSequence.AppendCallback(Attack);
+            
+            _attackSequence.Append(
+                spriteRenderer.transform.DORotate(Vector3.zero, returnDuration)
+                    .SetEase(Ease.InOutQuad)
+            );
+        }
+        
         void FlipSprite()
         {
             Vector3 moveDirection = transform.position - _lastPosition;
 
             if (moveDirection.x > 0.01f)
-                _spriteRenderer.flipX = false;
+                spriteRenderer.flipX = false;
             else if (moveDirection.x < -0.01f)
-                _spriteRenderer.flipX = true;
+                spriteRenderer.flipX = true;
 
             _lastPosition = transform.position;
         }
 
         void HandleDeath()
         {
+            // TODO  судя по всему drop мешает врагам ходить
             ItemFactory.Instance.TrySpawnRandom(transform.position, out Item item);
 
             Destroy(gameObject);
@@ -110,6 +144,7 @@ namespace Gameplay
 
         void OnDestroy()
         {
+            _attackSequence?.Kill();
             _health.OnDie -= HandleDeath;
         }
     }

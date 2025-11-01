@@ -68,10 +68,10 @@ namespace Gameplay
                 return;
             }
 
-            Vector3 spawnPosition;
-            if (FindValidSpawnPosition(out spawnPosition))
+            if (FindValidSpawnPosition(out var spawnPosition))
             {
-                Enemy enemy = Instantiate(GetRandomEnemyFromWave(currentWave), spawnPosition, Quaternion.identity);
+                var prefab = GetRandomEnemyFromWave(currentWave);
+                Enemy enemy = Instantiate(prefab, spawnPosition, Quaternion.identity);
                 enemy.Init(player);
                 activeEnemies.Add(enemy);
                 enemiesSpawnedInWave++;
