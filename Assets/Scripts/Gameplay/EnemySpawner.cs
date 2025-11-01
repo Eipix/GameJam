@@ -8,6 +8,9 @@ namespace Gameplay
 {
     public class EnemySpawner : Singleton<EnemySpawner>
     {
+        public delegate void WaveEndedHandler(int waveIndex);
+        public event WaveEndedHandler WaveEnded;
+        
         [System.Serializable]
         public class Wave
         {
@@ -59,6 +62,7 @@ namespace Gameplay
             {
                 if (activeEnemies.Count == 0)
                 {
+                    WaveEnded?.Invoke(currentWaveIndex);
                     NextWave();
                 }
                 return;
@@ -74,7 +78,7 @@ namespace Gameplay
 
                 Health health = enemy.GetComponent<Health>();
                 health.OnDie += () => OnEnemyDeath(enemy);
-            
+
             }
         }
 
@@ -123,3 +127,4 @@ namespace Gameplay
         }
     }
 }
+
