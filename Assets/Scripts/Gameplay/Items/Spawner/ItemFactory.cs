@@ -1,10 +1,13 @@
 using Common;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class ItemSpawner : Singleton<ItemSpawner>
+public class ItemFactory : Singleton<ItemFactory>
 {
     [SerializeField] private List<DropChanceItem> _itemPrefabs = new();
+
+    public event UnityAction<Item> Spawned;
 
     public bool TrySpawnRandom(Vector3 position, out Item item)
     {
@@ -13,6 +16,7 @@ public class ItemSpawner : Singleton<ItemSpawner>
             if(GetRandomValue() <= drop.Chance)
             {
                 item = Instantiate(drop.Item, position, Quaternion.identity);
+                Spawned?.Invoke(item);
                 return true;
             }
         }

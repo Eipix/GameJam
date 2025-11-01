@@ -12,6 +12,8 @@ public class DraculasСloak : Item
         if (player.TryGetComponent(out Health health) is false)
             throw new InvalidOperationException($"Игрок должен содержать компонент {nameof(Health)}");
 
+        OnPicked();
+
         float speedBonus = player.DefaultSpeed * _speedMultiplier;
 
         Sequence sequence = DOTween.Sequence();

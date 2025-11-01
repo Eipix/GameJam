@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -102,6 +101,8 @@ namespace Gameplay
 
         void HandleDeath()
         {
+            ItemFactory.Instance.TrySpawnRandom(transform.position, out Item item);
+
             Destroy(gameObject);
             _navMeshAgent.enabled = false;
             enabled = false;
