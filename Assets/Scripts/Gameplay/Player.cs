@@ -20,8 +20,9 @@ namespace Gameplay
     
         [SerializeField] private List<GameObject> weapons = new List<GameObject>();
         
-        // [SerializeField] private SpriteRenderer StateAndMove;
-        // [SerializeField] private SpriteRenderer StateAndMove;
+        [SerializeField] private Sprite StateAndMove;
+        [SerializeField] private Sprite Damagable;
+        [SerializeField] private Sprite AttackHolyWater;
         
         private CharacterController _characterController;
         private SpriteRenderer _spriteRenderer;

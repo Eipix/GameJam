@@ -17,7 +17,7 @@ namespace Gameplay.Projectiles
         private Vector3 targetPosition;
         private float travelTime;
         private float currentTime;
-        
+
 
         protected override void InitializeMovement(Vector3 direction)
         {
@@ -25,7 +25,7 @@ namespace Gameplay.Projectiles
             targetPosition = startPosition + direction.normalized * (speed * lifetime);
             travelTime = lifetime;
             currentTime = 0f;
-            
+
             //Destroy(gameObject, lifetime);
         }
 
@@ -35,10 +35,10 @@ namespace Gameplay.Projectiles
             {
                 currentTime += Time.deltaTime;
                 float t = Mathf.Clamp01(currentTime / travelTime);
-                
+
                 Vector3 horizontalPosition = Vector3.Lerp(startPosition, targetPosition, t);
                 float height = arcCurve.Evaluate(t) * arcHeight;
-                
+
                 transform.position = horizontalPosition + Vector3.up * height;
             }
             else
@@ -50,23 +50,24 @@ namespace Gameplay.Projectiles
 
         protected override void HandleCollider(Collider target)
         {
-           
         }
 
         private void CreatPuddle()
         {
-            RaycastHit hit;
+            // RaycastHit hit;
+            // Vector3 position = transform.position;
+            //
+            // if (Physics.Raycast(position, Vector3.down, out hit))
+            // {
+            //     hit.point = new Vector3(hit.point.x, hit.point.y + 0.05f, hit.point.z);
+            //     
             Vector3 position = transform.position;
-            
-            if (Physics.Raycast(position, Vector3.down, out hit))
-            {
-                hit.point = new Vector3(hit.point.x, hit.point.y + 0.05f, hit.point.z);
-                
-                var puddle =  Instantiate(puddlePrefab, hit.point, Quaternion.identity );
-                puddle.Init(2);
-            }
-        }
         
+            var puddle = Instantiate(puddlePrefab, position, Quaternion.identity);
+            puddle.Init(2);
+            //}
+        }
+
         private void DealAreaDamage()
         {
             PlayBreakSound();

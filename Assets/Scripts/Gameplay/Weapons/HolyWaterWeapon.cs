@@ -13,7 +13,8 @@ namespace Gameplay.Weapons
 
         [SerializeField] private Camera playerCamera;
 
-        
+		[SerializeField] private Transform groundLevel;
+
         private float _nextFireTime;
 
         private void Update()
@@ -29,7 +30,7 @@ namespace Gameplay.Weapons
         private void Fire()
         {
             Vector3 position = GetMousePosition();
-            position.y = firePoint.position.y;
+            position.y = groundLevel.position.y;
             Vector3 direction = (position - firePoint.position).normalized;
             float distance = Vector3.Distance(firePoint.position, position);
 
