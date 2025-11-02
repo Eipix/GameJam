@@ -150,7 +150,6 @@ namespace Gameplay
 
         void OnDestroy()
         {
-            _health.PlayDamageSound();
             _attackSequence?.Kill();
             _health.OnDie -= HandleDeath;
         }
