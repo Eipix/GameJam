@@ -13,6 +13,7 @@ public class BloodBottle : Item
 
         OnPicked();
         health.Heal(health.CurrentHealth * _multiplier);
+
         Destroy(gameObject);
     }
 }

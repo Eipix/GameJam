@@ -1,22 +1,38 @@
-using System;
-using UnityEngine;
 using Common;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class ExperienceFactory : Singleton<ExperienceFactory>
 {
+    [SerializeField] private UIProgressBar _progressBar;
+    [SerializeField, Range(1, 10)] private int _particleSpawnedCount = 5;
     [SerializeField] private ExperienceParticle _particlePrefab;
 
-    public void Spawn(int score)
+    public IReadOnlyList<ExperienceParticle> Spawn(Transform transform, int score)
     {
+        List<ExperienceParticle> particles = new();
+
         int scorePerParticle = _particlePrefab.ScorePerParticle;
 
-        if (score < scorePerParticle)
-            throw new InvalidOperationException($"Необходимые опыт ({score}) меньше чем очки за 1 частицу ({scorePerParticle}). Повысьте необходимые опыт или измените опыт который дает 1 частица в ее префабе.");
-        
-        if (score % scorePerParticle is 0)
+        int baseValue = score / _particleSpawnedCount;     // Основное значение (целая часть)
+        int remainder = score % _particleSpawnedCount;     // Остаток
+
+        particles.Add(SpawnParticle(baseValue + remainder, transform));
+
+        for (int i = 1; i < _particleSpawnedCount; i++)
         {
-            float spawnCount = score / scorePerParticle;
-            throw new InvalidOperationException($"Невозможно заспавнить {Conve}.Опыт за 1 частицу составляет {scorePerParticle}");
+            var particle = SpawnParticle(baseValue, transform);
+            particles.Add(particle);
         }
+
+        return particles;
+    }
+
+    private ExperienceParticle SpawnParticle(int scorePerParticle, Transform transform)
+    {
+        var particle = Instantiate(_particlePrefab, transform.position, Quaternion.identity);
+        particle.Init(transform, _progressBar, scorePerParticle);
+        return particle;
     }
 }
