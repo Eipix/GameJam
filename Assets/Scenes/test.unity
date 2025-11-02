@@ -823,10 +823,16 @@ MonoBehaviour:
   waves:
   - enemyPrefabs:
     - {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
+    - {fileID: 8345202867225419560, guid: c7dfef7c2a3fad54e83b1a8f6d4ed6f4, type: 3}
+    - {fileID: 8345202867225419560, guid: 531d09b25c0eaae43b7396be740b7489, type: 3}
+    - {fileID: 8345202867225419560, guid: 0d9a4823f9721f34ea4b24ea501c127b, type: 3}
     maxEnemies: 30
     bossPrefab: {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
   - enemyPrefabs:
     - {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
+    - {fileID: 8345202867225419560, guid: 531d09b25c0eaae43b7396be740b7489, type: 3}
+    - {fileID: 8345202867225419560, guid: c7dfef7c2a3fad54e83b1a8f6d4ed6f4, type: 3}
+    - {fileID: 8345202867225419560, guid: 0d9a4823f9721f34ea4b24ea501c127b, type: 3}
     maxEnemies: 60
     bossPrefab: {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
   maxActiveEnemies: 15
