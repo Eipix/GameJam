@@ -4,8 +4,6 @@ using System;
 
 public class TornCloak : Item
 {
-    private const float MinSpeed = 1f;
-
     private readonly float _slowdownMultiplier = 0.5f;
     private readonly float _slowdownDuration = 5f;
 

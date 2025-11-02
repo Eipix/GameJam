@@ -3,24 +3,31 @@ using DG.Tweening;
 
 public class UIProgressBar : MonoBehaviour
 {
+    public const int MaxProgress = 900;
+
+    [SerializeField, Range(0.1f, 3f)] private float _fillSpeed = 0.3f;
     [SerializeField] private RectTransform _fill;
     [SerializeField] private Vector2 _range;
 
     private Tween _filling;
 
-    public void Fill(Vector2 range, float currentValue)
+    public int CurrentProgress = MaxProgress;
+
+    protected void Fill(Vector2 range, float currentValue)
     {
         float value = GetValue(range, currentValue);
         _fill.anchoredPosition = new Vector2(0, value);
     }
 
-    public Tween DOFill(Vector2 range, float currentValue, float duration)
+    public Tween DOFill(int decreasing)
     {
         if (_filling != null && _filling.IsActive())
             _filling.Complete();
 
-        float value = GetValue(range, currentValue);
-        _filling = _fill.DOAnchorPosX(value, duration);
+        CurrentProgress = Mathf.Max(0, CurrentProgress - decreasing);
+
+        float value = GetValue(new Vector2(0, MaxProgress), CurrentProgress);
+        _filling = _fill.DOAnchorPosX(value, _fillSpeed);
         return _filling;
     }
 
