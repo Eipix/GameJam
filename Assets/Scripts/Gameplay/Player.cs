@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -16,6 +18,8 @@ namespace Gameplay
         [SerializeField] private float gravity = -9.81f;
         [SerializeField] private float groundedGravity = -2f;
     
+        [SerializeField] private List<GameObject> weapons = new List<GameObject>();
+        
         private CharacterController _characterController;
         private SpriteRenderer _spriteRenderer;
     
@@ -32,6 +36,17 @@ namespace Gameplay
         {
             _characterController = GetComponent<CharacterController>();
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            
+            EnemySpawner.Instance.WaveEnded += OnWaveEnded;
+        }
+
+        private void OnWaveEnded(int waveIndex)
+        {
+            if(waveIndex < weapons.Count)
+            {
+                weapons[waveIndex].SetActive(false);
+            }
+            
         }
 
         void Update()
@@ -74,6 +89,11 @@ namespace Gameplay
                 _spriteRenderer.flipX = true;
             else if (horizontal < 0)
                 _spriteRenderer.flipX = false;
+        }
+
+        private void OnDestroy()
+        {
+            EnemySpawner.Instance.WaveEnded -= OnWaveEnded;
         }
     }
 }

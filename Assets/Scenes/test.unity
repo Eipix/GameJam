@@ -340,6 +340,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3289541653539318884, guid: de869fb3cce6d524a83a671788da3498, type: 3}
   m_PrefabInstance: {fileID: 4535756853646402624}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &533383355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2038415522705629186, guid: 82c13304187dbda4c9b2f1a1238a161a, type: 3}
+  m_PrefabInstance: {fileID: 2833770660609162857}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &533383356 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1509143717945659894, guid: 82c13304187dbda4c9b2f1a1238a161a, type: 3}
@@ -577,7 +582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &895613934
 Transform:
   m_ObjectHideFlags: 0
@@ -802,9 +807,11 @@ MonoBehaviour:
   - enemyPrefabs:
     - {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
     maxEnemies: 30
+    bossPrefab: {fileID: 0}
   - enemyPrefabs:
     - {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
     maxEnemies: 60
+    bossPrefab: {fileID: 0}
   maxActiveEnemies: 15
   spawnDistanceMin: 10
   spawnDistanceMax: 20
@@ -1133,7 +1140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2038415522705629186, guid: 82c13304187dbda4c9b2f1a1238a161a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7274375620325910649, guid: 82c13304187dbda4c9b2f1a1238a161a, type: 3}
       propertyPath: playerCamera
@@ -1216,6 +1223,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8146935202894029624, guid: de869fb3cce6d524a83a671788da3498, type: 3}
+      propertyPath: weapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8146935202894029624, guid: de869fb3cce6d524a83a671788da3498, type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 895613933}
+    - target: {fileID: 8146935202894029624, guid: de869fb3cce6d524a83a671788da3498, type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 533383355}
     - target: {fileID: 8431282675068835095, guid: de869fb3cce6d524a83a671788da3498, type: 3}
       propertyPath: m_FlipX
       value: 1
