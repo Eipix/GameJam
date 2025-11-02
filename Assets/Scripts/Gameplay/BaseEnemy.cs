@@ -1,13 +1,10 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace Gameplay
 {
-    [RequireComponent(
-        typeof(NavMeshAgent),
-        typeof(Health))]
+    [RequireComponent(typeof(NavMeshAgent), typeof(Health))]
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private int _score = 10;
@@ -26,36 +23,34 @@ namespace Gameplay
         [SerializeField] private float attackDuration = 0.15f;
         [SerializeField] private float returnDuration = 0.15f;
 
-        
         [Header("Target")]
         [SerializeField] private Transform target;
-        
+
         [Header("Components")]
         [SerializeField] private SpriteRenderer spriteRenderer;
-        
+
         private NavMeshAgent _navMeshAgent;
         private Health _health;
         private Vector3 _lastPosition;
         private float _lastAttackTime;
 
         private Sequence _attackSequence;
-        
+
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _health = GetComponent<Health>();
-            
 
             _navMeshAgent.updateRotation = false;
             _navMeshAgent.updateUpAxis = true;
             _navMeshAgent.speed = moveSpeed;
             _navMeshAgent.stoppingDistance = stoppingDistance;
             _navMeshAgent.baseOffset = 1f;
-            
+            //_navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
             _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
             _navMeshAgent.avoidancePriority = 0;
             _navMeshAgent.radius = 0.5f;
-            
+
             _health.OnDie += HandleDeath;
             _lastPosition = transform.position;
         }
@@ -93,7 +88,6 @@ namespace Gameplay
             if (Time.time >= _lastAttackTime + attackCooldown)
             {
                 PlayAttackAnimation();
-                
                 _lastAttackTime = Time.time;
             }
         }
@@ -114,19 +108,19 @@ namespace Gameplay
             float attackAngle = attackTiltAngle * direction;
 
             _attackSequence = DOTween.Sequence();
-            
+
             _attackSequence.Append(
                 spriteRenderer.transform.DORotate(new Vector3(0, 0, attackAngle), attackDuration)
                     .SetEase(Ease.OutBack)
             );
             _attackSequence.AppendCallback(Attack);
-            
+
             _attackSequence.Append(
                 spriteRenderer.transform.DORotate(Vector3.zero, returnDuration)
                     .SetEase(Ease.InOutQuad)
             );
         }
-        
+
         void FlipSprite()
         {
             Vector3 moveDirection = transform.position - _lastPosition;
@@ -143,9 +137,9 @@ namespace Gameplay
         {
             ItemFactory.Instance.TrySpawnRandom(transform.position, out Item item);
             ExperienceFactory.Instance.Spawn(transform, _score);
-            Destroy(gameObject);
-            _navMeshAgent.enabled = false;
+            _navMeshAgent.isStopped = true;
             enabled = false;
+            Destroy(gameObject);
         }
 
         void OnDestroy()

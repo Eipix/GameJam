@@ -2,32 +2,25 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace Gameplay
 {
-    [RequireComponent(typeof(CharacterController), typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Rigidbody), typeof(SpriteRenderer))]
     public class Player : MonoBehaviour
     {
         public const float MinSpeed = 1.0f;
         public readonly float DefaultSpeed = 5f;
 
-        [Header("Movement Settings")] [SerializeField]
-        private float moveSpeed = 5f;
+        [Header("Movement Settings")]
+        [SerializeField] private float moveSpeed = 5f;
 
-        [Header("Gravity")]
-        [SerializeField] private float gravity = -9.81f;
-        [SerializeField] private float groundedGravity = -2f;
-    
         [SerializeField] private List<GameObject> weapons = new List<GameObject>();
         
         [SerializeField] private Sprite StateAndMove;
         [SerializeField] private Sprite Damagable;
         [SerializeField] private Sprite AttackHolyWater;
         
-        private CharacterController _characterController;
+        private Rigidbody _rigidbody;
         private SpriteRenderer _spriteRenderer;
-    
-        private Vector3 velocity;
 
         public float Speed => moveSpeed;
     
@@ -38,7 +31,7 @@ namespace Gameplay
 
         void Init()
         {
-            _characterController = GetComponent<CharacterController>();
+            _rigidbody = GetComponent<Rigidbody>();
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             
             EnemySpawner.Instance.WaveEnded += OnWaveEnded;
@@ -50,13 +43,17 @@ namespace Gameplay
             {
                 weapons[waveIndex].SetActive(false);
             }
-            
+        }
+
+        void FixedUpdate()
+        {
+            HandleMovement();
         }
 
         void Update()
         {
-            ApplyGravity();
-            HandleMovement();
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            FlipSprite(horizontal);
         }
 
         public void ChangeSpeed(float speed)
@@ -71,20 +68,9 @@ namespace Gameplay
             float vertical = Input.GetAxisRaw("Vertical");
 
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+            Vector3 movement = direction * moveSpeed;
 
-            _characterController.Move(direction * (moveSpeed * Time.deltaTime));
-            FlipSprite(horizontal);
-        }
-
-        private void ApplyGravity()
-        {
-            if (_characterController.isGrounded && velocity.y < 0)
-            {
-                velocity.y = groundedGravity;
-            }
-
-            velocity.y += gravity * Time.deltaTime;
-            _characterController.Move(velocity * Time.deltaTime);
+            _rigidbody.velocity = new Vector3(movement.x, 0f, movement.z);
         }
     
         private void FlipSprite(float horizontal)
