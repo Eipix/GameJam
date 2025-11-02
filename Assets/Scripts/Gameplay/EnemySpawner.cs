@@ -64,8 +64,6 @@ namespace Gameplay
                 if (activeEnemies.Count == 0)
                 {
                     BossSpawn();
-
-
                 }
                 return;
             }
@@ -97,7 +95,11 @@ namespace Gameplay
                 Health health = boss.GetComponent<Health>();
                 health.OnDie += () =>
                 {
-                    OnEnemyDeath(boss);
+                    if (activeEnemies.Contains(boss))
+                    {
+                        activeEnemies.Remove(boss);
+                    }
+                    
                     WaveEnded?.Invoke(currentWaveIndex);
                     NextWave();
                 };
@@ -140,6 +142,7 @@ namespace Gameplay
         
         private void NextWave()
         {
+            Debug.LogError(currentWaveIndex);
             currentWaveIndex++;
             enemiesSpawnedInWave = 0;
 
