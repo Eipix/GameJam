@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class UIProgressBar : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class UIProgressBar : MonoBehaviour
     [SerializeField, Range(0.1f, 3f)] private float _fillSpeed = 0.3f;
     [SerializeField] private RectTransform _fill;
     [SerializeField] private Vector2 _range;
+
+    public event UnityAction<int> ValueChanged;
+    public event UnityAction MinValueAchieved;
 
     private Tween _filling;
 
@@ -27,7 +31,14 @@ public class UIProgressBar : MonoBehaviour
         CurrentProgress = Mathf.Max(0, CurrentProgress - decreasing);
 
         float value = GetValue(new Vector2(0, MaxProgress), CurrentProgress);
+         
         _filling = _fill.DOAnchorPosX(value, _fillSpeed);
+
+        if (value <= 0)
+            MinValueAchieved?.Invoke();
+
+        ValueChanged?.Invoke(CurrentProgress);
+
         return _filling;
     }
 

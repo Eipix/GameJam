@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Gameplay;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent (typeof(SphereCollider))]
@@ -40,7 +39,6 @@ public class ExperienceParticle : MonoBehaviour
         var bounds = _target.bounds;
 
         Vector3 bottomPoint = new Vector3(bounds.center.x, bounds.min.y, bounds.center.z);
-
 
         float angleRad = UnityEngine.Random.Range(1, 361) * Mathf.Deg2Rad;
         float x = Mathf.Cos(angleRad) * _fallDistance;
