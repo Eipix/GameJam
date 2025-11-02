@@ -142,7 +142,6 @@ namespace Gameplay
         
         private void NextWave()
         {
-            Debug.LogError(currentWaveIndex);
             currentWaveIndex++;
             enemiesSpawnedInWave = 0;
 

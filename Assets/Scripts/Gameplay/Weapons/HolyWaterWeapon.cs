@@ -43,12 +43,25 @@ namespace Gameplay.Weapons
         private Vector3 GetMousePosition()
         {
             Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            Plane horizontalPlane = new Plane(Vector3.up, new Vector3(0, groundLevel.transform.position.y, 0));
+
+            if (horizontalPlane.Raycast(ray, out float distance))
             {
-                return hit.point;
+                return ray.GetPoint(distance);
             }
 
-            return Vector3.zero;
+            return ray.origin + ray.direction * 50f;
         }
+        
+        // private Vector3 GetMousePosition()
+        // {
+        //     Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        //     if (Physics.Raycast(ray, out RaycastHit hit))
+        //     {
+        //         return hit.point;
+        //     }
+        //
+        //     return Vector3.zero;
+        // }
     }
 }
