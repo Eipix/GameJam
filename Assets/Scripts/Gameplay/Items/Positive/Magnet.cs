@@ -1,10 +1,11 @@
 using Gameplay;
+using System.Linq;
 
 public class Magnet : Item
 {
     protected override void OnPlayerEnter(Player player)
     {
-        var activeParticles = ExperienceFactory.Instance.ActiveParticles;
+        var activeParticles = ExperienceFactory.Instance.ActiveParticles.ToList();
 
         foreach (var particle in activeParticles)
         {
@@ -12,5 +13,6 @@ public class Magnet : Item
         }
 
         OnPicked();
+        Destroy(gameObject);
     }
 }
