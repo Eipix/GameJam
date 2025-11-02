@@ -12,9 +12,22 @@ public class Cutscene : MonoBehaviour, IPointerClickHandler
     private int _previousIndex;
     private int _currentIndex;
 
+    private bool _isInit;
+
     private void Awake()
     {
-        gameObject.SetActive(false);
+        Init();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Increment();
+    }
+
+    public void Init()
+    {
+        if (_isInit)
+            return;
 
         _frames = GetComponentsInChildren<Frame>(true);
 
@@ -25,17 +38,14 @@ public class Cutscene : MonoBehaviour, IPointerClickHandler
         {
             frame.gameObject.SetActive(false);
         }
-    }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Increment();
+        _isInit = true;
     }
 
     // Запуск катсцены
     public void Launch()
     {
-        gameObject.SetActive(true);
+        Init();
         _frames[0].gameObject.SetActive(true);
     }
 
