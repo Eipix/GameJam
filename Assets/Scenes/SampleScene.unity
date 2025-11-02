@@ -708,8 +708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e1e8253c5dd0f47816c68edf2b689f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _punchStrength: 0.34
-  _duration: 0.29
+  _punchStrength: 0.2
+  _duration: 0.3
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,8 +1138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e1e8253c5dd0f47816c68edf2b689f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _punchStrength: 0.34
-  _duration: 0.29
+  _punchStrength: 0.2
+  _duration: 0.3
 --- !u!1 &1246639209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1751,7 +1751,7 @@ MonoBehaviour:
   spawnDistanceMin: 10
   spawnDistanceMax: 20
   maxSpawnAttempts: 10
-  player: {fileID: 0}
+  player: {fileID: 1181846324}
 --- !u!4 &1812715304
 Transform:
   m_ObjectHideFlags: 0
