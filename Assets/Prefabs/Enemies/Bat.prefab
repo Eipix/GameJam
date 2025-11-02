@@ -234,6 +234,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 10
+  DamageSound: {fileID: 8300000, guid: 06e4d245ed947824aaca4ddd34e806b5, type: 3}
+  DamageVolume: 0.1
+  audioSource: {fileID: 0}
 --- !u!136 &8538860238794707499
 CapsuleCollider:
   m_ObjectHideFlags: 0

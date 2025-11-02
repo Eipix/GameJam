@@ -329,6 +329,7 @@ MonoBehaviour:
   moveSpeed: 5
   gravity: -9.81
   groundedGravity: -2
+  weapons: []
 --- !u!143 &236175046002978611
 CharacterController:
   m_ObjectHideFlags: 0
@@ -420,3 +421,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 10
+  DamageSound: {fileID: 8300000, guid: 2ec0a87f1f7bf604da6efebfac0e4777, type: 3}
+  DamageVolume: 0.1
+  audioSource: {fileID: 0}

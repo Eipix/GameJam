@@ -155,6 +155,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   arcHeight: 5
   puddlePrefab: {fileID: 7612355266448243621, guid: aa8bb1ed4b877a445b46a51caf49ac0d, type: 3}
+  breakSound: {fileID: 8300000, guid: 030b12cc36d699c47bab2203feba36ef, type: 3}
+  breakVolume: 0.1
 --- !u!54 &3187993708404223461
 Rigidbody:
   m_ObjectHideFlags: 0
