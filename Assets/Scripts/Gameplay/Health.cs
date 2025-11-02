@@ -62,19 +62,19 @@ namespace Gameplay
             HandleDeath();
         }
 
-        private void PlayDamageSound()
+        public void PlayDamageSound()
         {
             if (DamageSound == null) return;
 
             float currentTime = Time.time;
 
-            // Проверяем как локальную задержку, так и глобальную
+            // Проверяем задержки
             if (currentTime - _lastSoundTime < soundCooldown ||
                 currentTime - _globalLastSoundTime < soundCooldown)
                 return;
 
-            // Воспроизводим звук и обновляем время
-            audioSource.PlayOneShot(DamageSound, DamageVolume);
+            AudioSource.PlayClipAtPoint(DamageSound, transform.position, DamageVolume);
+
             _lastSoundTime = currentTime;
             _globalLastSoundTime = currentTime;
         }
@@ -94,6 +94,7 @@ namespace Gameplay
 
         public void Kill()
         {
+
             CurrentHealth = 0f;
             OnDamaged?.Invoke(MaxHealth, null);
             HandleDeath();

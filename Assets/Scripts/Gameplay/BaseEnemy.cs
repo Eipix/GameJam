@@ -143,7 +143,6 @@ namespace Gameplay
         {
             ItemFactory.Instance.TrySpawnRandom(transform.position, out Item item);
             ExperienceFactory.Instance.Spawn(transform, _score);
-
             Destroy(gameObject);
             _navMeshAgent.enabled = false;
             enabled = false;
@@ -151,6 +150,7 @@ namespace Gameplay
 
         void OnDestroy()
         {
+            _health.PlayDamageSound();
             _attackSequence?.Kill();
             _health.OnDie -= HandleDeath;
         }

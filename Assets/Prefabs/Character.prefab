@@ -421,6 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 10
-  DamageSound: {fileID: 8300000, guid: 2ec0a87f1f7bf604da6efebfac0e4777, type: 3}
+  DamageSound: {fileID: 0}
   DamageVolume: 0.1
   audioSource: {fileID: 0}
+  soundCooldown: 0.1
