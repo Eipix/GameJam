@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8129865403431511311}
   - component: {fileID: 2305406370568845675}
   - component: {fileID: 5492922019392204396}
+  - component: {fileID: 3945418913054425638}
   m_Layer: 0
   m_Name: Experience Particle
   m_TagString: Untagged
@@ -103,5 +104,20 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3945418913054425638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842083819340188476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9648334b1ea35f2418d40fe767ae90a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fallDistance: 1
+  _fallDuration: 0.5
+  _moveToPlayerDuration: 0.3

@@ -10,6 +10,8 @@ namespace Gameplay
         typeof(Health))]
     public class Enemy : MonoBehaviour
     {
+        [SerializeField] private int _score = 10;
+
         [Header("Movement Settings")]
         [SerializeField] private float moveSpeed = 3.5f;
         [SerializeField] private float stoppingDistance = 2f;
@@ -135,6 +137,7 @@ namespace Gameplay
         void HandleDeath()
         {
             ItemFactory.Instance.TrySpawnRandom(transform.position, out Item item);
+            ExperienceFactory.Instance.Spawn(transform, _score);
 
             Destroy(gameObject);
             _navMeshAgent.enabled = false;
