@@ -952,7 +952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1197768831
 RectTransform:
   m_ObjectHideFlags: 0
@@ -988,6 +988,8 @@ MonoBehaviour:
   _exit: {fileID: 593772801}
   _play: {fileID: 1218592904}
   _duration: 3
+  _idleMoveDuration: 1
+  _idleMoveOffset: 10
 --- !u!1 &1218592902
 GameObject:
   m_ObjectHideFlags: 0
