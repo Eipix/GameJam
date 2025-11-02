@@ -7,7 +7,6 @@ using UnityEngine;
 public class Repeller : Item
 {
     [SerializeField, Range(1, 100)] private float _force = 10f;
-    [SerializeField, Range(1, 300)] private float _radius = 100f;
 
     protected override void OnPlayerEnter(Player player)
     {
