@@ -587,6 +587,7 @@ GameObject:
   - component: {fileID: 593772803}
   - component: {fileID: 593772802}
   - component: {fileID: 593772801}
+  - component: {fileID: 593772804}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -695,6 +696,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593772799}
   m_CullTransparentMesh: 1
+--- !u!114 &593772804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593772799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e1e8253c5dd0f47816c68edf2b689f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _punchStrength: 0.34
+  _duration: 0.29
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1017,7 @@ GameObject:
   - component: {fileID: 1218592906}
   - component: {fileID: 1218592905}
   - component: {fileID: 1218592904}
+  - component: {fileID: 1218592907}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -1110,6 +1126,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218592902}
   m_CullTransparentMesh: 1
+--- !u!114 &1218592907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218592902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e1e8253c5dd0f47816c68edf2b689f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _punchStrength: 0.34
+  _duration: 0.29
 --- !u!1 &1246639209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,6 +1709,64 @@ PrefabInstance:
       addedObject: {fileID: 1845842564}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de869fb3cce6d524a83a671788da3498, type: 3}
+--- !u!1 &1812715302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1812715304}
+  - component: {fileID: 1812715303}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1812715303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812715302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f411459722697d4aa9258b78950def2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - enemyPrefabs:
+    - {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
+    maxEnemies: 30
+    bossPrefab: {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
+  - enemyPrefabs:
+    - {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
+    maxEnemies: 60
+    bossPrefab: {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
+  maxActiveEnemies: 15
+  spawnDistanceMin: 10
+  spawnDistanceMax: 20
+  maxSpawnAttempts: 10
+  player: {fileID: 0}
+--- !u!4 &1812715304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812715302}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5838661, z: 3.7599983}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1845842564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3397959225927637904, guid: 878919cf814ce144b92889646a774618, type: 3}
@@ -1881,3 +1969,4 @@ SceneRoots:
   - {fileID: 1334339074}
   - {fileID: 203963833}
   - {fileID: 247017015}
+  - {fileID: 1812715304}
