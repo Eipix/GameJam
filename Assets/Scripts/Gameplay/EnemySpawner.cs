@@ -16,6 +16,7 @@ namespace Gameplay
         {
             [FormerlySerializedAs("enemyPrefab")] public List<Enemy> enemyPrefabs;
             public int maxEnemies;
+            public Enemy bossPrefab;
         }
 
         [SerializeField] private List<Wave> waves = new List<Wave>();
@@ -62,8 +63,9 @@ namespace Gameplay
             {
                 if (activeEnemies.Count == 0)
                 {
-                    WaveEnded?.Invoke(currentWaveIndex);
-                    NextWave();
+                    BossSpawn();
+
+
                 }
                 return;
             }
@@ -81,7 +83,28 @@ namespace Gameplay
 
             }
         }
+        
+        private void BossSpawn()
+        {
+            Wave currentWave = waves[currentWaveIndex];
 
+            if (FindValidSpawnPosition(out var spawnPosition))
+            {
+                Enemy boss = Instantiate(currentWave.bossPrefab, spawnPosition, Quaternion.identity);
+                boss.Init(player);
+                activeEnemies.Add(boss);
+
+                Health health = boss.GetComponent<Health>();
+                health.OnDie += () =>
+                {
+                    OnEnemyDeath(boss);
+                    WaveEnded?.Invoke(currentWaveIndex);
+                    NextWave();
+                };
+            }
+            
+        }
+        
         private bool FindValidSpawnPosition(out Vector3 position)
         {
             position = Vector3.zero;
