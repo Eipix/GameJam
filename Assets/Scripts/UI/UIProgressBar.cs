@@ -6,16 +6,16 @@ public class UIProgressBar : MonoBehaviour
 {
     public const int MaxProgress = 900;
 
-    [SerializeField, Range(0.1f, 3f)] private float _fillSpeed = 0.3f;
+    [SerializeField, Range(0.1f, 3f)] private float _fillSpeed = 0.1f;
     [SerializeField] private RectTransform _fill;
-    [SerializeField] private Vector2 _range;
+    [SerializeField] private Vector2 _range = new(-540f, 0f);
 
     public event UnityAction<int> ValueChanged;
     public event UnityAction MinValueAchieved;
 
     private Tween _filling;
 
-    public int CurrentProgress = MaxProgress;
+    public int CurrentProgress { get; private set; } = MaxProgress;
 
     protected void Fill(Vector2 range, float currentValue)
     {
@@ -26,15 +26,16 @@ public class UIProgressBar : MonoBehaviour
     public Tween DOFill(int decreasing)
     {
         if (_filling != null && _filling.IsActive())
-            _filling.Complete();
+            _filling.Complete(true);
 
-        CurrentProgress = Mathf.Max(0, CurrentProgress - decreasing);
+        CurrentProgress -= Mathf.Max(0, decreasing);
+        CurrentProgress = Mathf.Max(0, CurrentProgress);
 
         float value = GetValue(new Vector2(0, MaxProgress), CurrentProgress);
-         
-        _filling = _fill.DOAnchorPosX(value, _fillSpeed);
 
-        if (value <= 0)
+        _filling = _fill.DOAnchorPosX(value, _fillSpeed); 
+
+        if (CurrentProgress <= 0)
             MinValueAchieved?.Invoke();
 
         ValueChanged?.Invoke(CurrentProgress);

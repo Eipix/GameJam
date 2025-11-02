@@ -17,8 +17,6 @@ public class ExperienceFactory : Singleton<ExperienceFactory>
     {
         List<ExperienceParticle> particles = new();
 
-        int scorePerParticle = _particlePrefab.ScorePerParticle;
-
         int baseValue = score / _particleSpawnedCount;     // Основное значение (целая часть)
         int remainder = score % _particleSpawnedCount;     // Остаток
 

@@ -6166,17 +6166,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &1103508270 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8546353272547221023, guid: a34af0a367e012544a5834b718c43fcf, type: 3}
-  m_PrefabInstance: {fileID: 1997273678}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19637c8a9503b3b4984933550cf41466, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1103508271 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3814052063610819563, guid: a34af0a367e012544a5834b718c43fcf, type: 3}
@@ -7129,8 +7118,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8546353272547221023, guid: a34af0a367e012544a5834b718c43fcf, type: 3}
-      propertyPath: _range.x
-      value: -540
+      propertyPath: _fillSpeed
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7142,6 +7131,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3814052063610819563, guid: a34af0a367e012544a5834b718c43fcf, type: 3}
   m_PrefabInstance: {fileID: 1273423080}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1273423082 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8546353272547221023, guid: a34af0a367e012544a5834b718c43fcf, type: 3}
+  m_PrefabInstance: {fileID: 1273423080}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19637c8a9503b3b4984933550cf41466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1273840437
 GameObject:
   m_ObjectHideFlags: 0
@@ -10546,7 +10546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45518fa5970c0144a8ac0f52382e79c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _progressBar: {fileID: 1103508270}
+  _progressBar: {fileID: 1273423082}
   _particlePrefab: {fileID: 3945418913054425638, guid: e1bf69a5c9963e845a35a231bb3697f0, type: 3}
   _particleSpawnedCount: 5
 --- !u!1 &1719010907 stripped

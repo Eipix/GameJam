@@ -20,7 +20,7 @@ public class ExperienceParticle : MonoBehaviour
 
     private Tween _fallToFloor;
 
-    public Tween MoveToPlayer { get; private set; }
+    public Sequence MoveToPlayer { get; private set; }
 
     public int ScorePerParticle { get; private set; }
 
@@ -60,11 +60,13 @@ public class ExperienceParticle : MonoBehaviour
         if (MoveToPlayer != null && MoveToPlayer.IsActive())
             MoveToPlayer.Complete(true);
 
-        MoveToPlayer = transform.DOMove(player.transform.position, _moveToPlayerDuration);
+        MoveToPlayer = DOTween.Sequence();
+        MoveToPlayer.Append(transform.DOMove(player.transform.position, _moveToPlayerDuration));
+        MoveToPlayer.Append(_progressBar.DOFill(ScorePerParticle));
+
         MoveToPlayer.OnStart(() => Collecting?.Invoke());
         MoveToPlayer.OnComplete(() =>
         {
-            _progressBar.DOFill(ScorePerParticle);
             Collected?.Invoke();
             Destroy(gameObject);
         });
@@ -76,5 +78,10 @@ public class ExperienceParticle : MonoBehaviour
             return;
 
         ForceCollect(player);
+    }
+
+    private void OnDestroy()
+    {
+        MoveToPlayer?.Kill();
     }
 }
