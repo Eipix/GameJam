@@ -189,9 +189,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3.5
-  stoppingDistance: 1.4
+  stoppingDistance: 1.9
   attackDamage: 1
-  attackRange: 1.5
+  attackRange: 2
   attackCooldown: 1
   attackTiltAngle: 30
   attackDuration: 0.15

@@ -50,7 +50,9 @@ namespace Gameplay
             _navMeshAgent.stoppingDistance = stoppingDistance;
             _navMeshAgent.baseOffset = 1f;
             
-            //_navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+            _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+            _navMeshAgent.avoidancePriority = 0;
+            _navMeshAgent.radius = 0.5f;
             
             _health.OnDie += HandleDeath;
             _lastPosition = transform.position;
@@ -63,11 +65,14 @@ namespace Gameplay
 
         void Update()
         {
-            if (!_navMeshAgent.isActiveAndEnabled) 
-                return;
-            
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
+            if (!_navMeshAgent.pathPending && _navMeshAgent.pathStatus != NavMeshPathStatus.PathComplete)
+            {
+                _navMeshAgent.SetDestination(transform.position);
+                return;
+            }
+            
             if (distanceToTarget <= attackRange)
             {
                 _navMeshAgent.SetDestination(transform.position);
