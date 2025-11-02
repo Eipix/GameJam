@@ -31,5 +31,7 @@ public class DraculasCloak : Item
             player.ChangeSpeed(-speedBonus);
             health.Invincibility = false;
         });
+
+        Destroy(gameObject);
     }
 }
