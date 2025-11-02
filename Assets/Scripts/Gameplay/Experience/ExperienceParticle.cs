@@ -11,6 +11,9 @@ public class ExperienceParticle : MonoBehaviour
 
     [SerializeField, Range(0.1f, 3f)] private float _moveToPlayerDuration;
 
+    public event Action Collecting;
+    public event Action Collected;
+
     private UIProgressBar _progressBar;
     private SphereCollider _collider;
     private Collider _target;
@@ -49,19 +52,29 @@ public class ExperienceParticle : MonoBehaviour
         _fallToFloor = transform.DOMove(finalPoint, _fallDuration);
     }
 
+    public void ForceCollect(Player player)
+    {
+        if (_fallToFloor != null && _fallToFloor.IsActive())
+            _fallToFloor.Complete();
+
+        if (MoveToPlayer != null && MoveToPlayer.IsActive())
+            MoveToPlayer.Complete(true);
+
+        MoveToPlayer = transform.DOMove(player.transform.position, _moveToPlayerDuration);
+        MoveToPlayer.OnStart(() => Collecting?.Invoke());
+        MoveToPlayer.OnComplete(() =>
+        {
+            _progressBar.DOFill(ScorePerParticle);
+            Collected?.Invoke();
+            Destroy(gameObject);
+        });
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Player player) is false)
             return;
 
-        if(_fallToFloor != null && _fallToFloor.IsActive())
-            _fallToFloor.Complete();
-
-        MoveToPlayer = transform.DOMove(player.transform.position, _moveToPlayerDuration)
-            .OnComplete(() =>
-            {
-                _progressBar.DOFill(ScorePerParticle);
-                Destroy(gameObject);
-            });
+        ForceCollect(player);
     }
 }

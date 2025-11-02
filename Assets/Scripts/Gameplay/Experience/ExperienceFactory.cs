@@ -6,8 +6,12 @@ using UnityEngine;
 public class ExperienceFactory : Singleton<ExperienceFactory>
 {
     [SerializeField] private UIProgressBar _progressBar;
-    [SerializeField, Range(1, 10)] private int _particleSpawnedCount = 5;
     [SerializeField] private ExperienceParticle _particlePrefab;
+    [SerializeField, Range(1, 10)] private int _particleSpawnedCount = 5;
+
+    private List<ExperienceParticle> _activeParticles = new();
+
+    public IReadOnlyList<ExperienceParticle> ActiveParticles => _activeParticles;
 
     public IReadOnlyList<ExperienceParticle> Spawn(Transform transform, int score)
     {
@@ -18,12 +22,11 @@ public class ExperienceFactory : Singleton<ExperienceFactory>
         int baseValue = score / _particleSpawnedCount;     // Основное значение (целая часть)
         int remainder = score % _particleSpawnedCount;     // Остаток
 
-        particles.Add(SpawnParticle(baseValue + remainder, transform));
+        SpawnParticle(baseValue + remainder, transform);
 
         for (int i = 1; i < _particleSpawnedCount; i++)
         {
-            var particle = SpawnParticle(baseValue, transform);
-            particles.Add(particle);
+            SpawnParticle(baseValue, transform);
         }
 
         return particles;
@@ -33,6 +36,8 @@ public class ExperienceFactory : Singleton<ExperienceFactory>
     {
         var particle = Instantiate(_particlePrefab, transform.position, Quaternion.identity);
         particle.Init(transform, _progressBar, scorePerParticle);
+        _activeParticles.Add(particle);
+        particle.Collected += () => _activeParticles.Remove(particle);
         return particle;
     }
 }
