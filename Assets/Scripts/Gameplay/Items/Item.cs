@@ -15,7 +15,7 @@ public abstract class Item : MonoBehaviour
         _collider.isTrigger = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent(out Player player) is false)
             return;
@@ -25,5 +25,9 @@ public abstract class Item : MonoBehaviour
 
     protected abstract void OnPlayerEnter(Player player);
 
-    protected void OnPicked() => Picked?.Invoke();
+    protected void OnPicked()
+    {
+        Debug.Log($"Активирован бонус типа {GetType().Name}");
+        Picked?.Invoke();
+    }
 }

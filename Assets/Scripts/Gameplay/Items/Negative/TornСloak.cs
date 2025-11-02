@@ -4,6 +4,8 @@ using System;
 
 public class TornCloak : Item
 {
+    private const float MinSpeed = 1f;
+
     private readonly float _slowdownMultiplier = 0.5f;
     private readonly float _slowdownDuration = 5f;
 
@@ -14,20 +16,22 @@ public class TornCloak : Item
 
         OnPicked();
 
-        float speedBonus = player.DefaultSpeed * _slowdownMultiplier;
+        float speedDescreasing = player.DefaultSpeed * _slowdownMultiplier;
 
         Sequence sequence = DOTween.Sequence();
 
         sequence.AppendCallback(() =>
         {
-            player.ChangeSpeed(-speedBonus);
+            player.ChangeSpeed(-speedDescreasing);
         });
 
         sequence.AppendInterval(_slowdownDuration);
 
         sequence.AppendCallback(() =>
         {
-            player.ChangeSpeed(speedBonus);
+            player.ChangeSpeed(speedDescreasing);
         });
+
+        Destroy(gameObject);
     }
 }

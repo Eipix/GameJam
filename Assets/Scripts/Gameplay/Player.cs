@@ -6,6 +6,7 @@ namespace Gameplay
     [RequireComponent(typeof(CharacterController), typeof(SpriteRenderer))]
     public class Player : MonoBehaviour
     {
+        public const float MinSpeed = 1.0f;
         public readonly float DefaultSpeed = 5f;
 
         [Header("Movement Settings")] [SerializeField]
@@ -42,6 +43,7 @@ namespace Gameplay
         public void ChangeSpeed(float speed)
         {
             moveSpeed += speed;
+            moveSpeed = Mathf.Max(MinSpeed, moveSpeed);
         }
 
         private void HandleMovement()
