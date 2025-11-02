@@ -14,6 +14,7 @@ namespace Gameplay
         [System.Serializable]
         public class Wave
         {
+            [field: SerializeField] public Cutscene Cutscene { get; private set; }
             [FormerlySerializedAs("enemyPrefab")] public List<Enemy> enemyPrefabs;
             public int maxEnemies;
             public Enemy bossPrefab;
@@ -32,7 +33,16 @@ namespace Gameplay
 
         private void Start()
         {
-            SpawnInitialEnemies();
+            var wave = waves[currentWaveIndex];
+
+            if(wave.Cutscene is null)
+            {
+                SpawnInitialEnemies();
+                return;
+            }
+
+            wave.Cutscene.Launch();
+            wave.Cutscene.Ended += SpawnInitialEnemies;
         }
 
         private void SpawnInitialEnemies()
