@@ -11,12 +11,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField, Range(0.1f, 10f)] private float _idleMoveDuration = 1f;
     [SerializeField, Range(1f, 100f)] private float _idleMoveOffset = 10f;
 
-
     private Sequence _show;
     private Sequence _hide;
     private Sequence _idleMove;
-
-    private RectTransform _canvasRect;
 
     private ButtonInfo _exitInfo;
     private ButtonInfo _playInfo;
@@ -27,12 +24,9 @@ public class MainMenu : MonoBehaviour
 
         _exitInfo = new ButtonInfo(_exit);
         _playInfo = new ButtonInfo(_play);
-
-        _canvasRect = (RectTransform)transform.root.transform;
     }
 
     private void OnEnable() => Show();
-    //private void OnDisable() => Hide();
 
     public Sequence Show()
     {
