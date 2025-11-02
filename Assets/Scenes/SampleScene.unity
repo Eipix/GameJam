@@ -1539,7 +1539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60325234b47f7304d94b88a05e0d96b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 1000
+  _maxHealth: 8
 --- !u!65 &1705776301
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1653,6 +1653,56 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1719874733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1719874734}
+  - component: {fileID: 1719874735}
+  m_Layer: 0
+  m_Name: Spear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1719874734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719874733}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.43, y: -0.32, z: 0.12}
+  m_LocalScale: {x: 2.1651, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1181846324}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1719874735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719874733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb04ed4fd02dcc48b289a53276d42bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 3054279940182447908, guid: af1edd0664366ef408a23fe6c408f4be, type: 3}
+  holdPoint: {fileID: 1719874734}
+  cooldown: 2
+  damage: 8
+  projectileSpeed: 20
+  playerCamera: {fileID: 1612583788}
 --- !u!1001 &1733457721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1711,6 +1761,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3289541653539318884, guid: de869fb3cce6d524a83a671788da3498, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1845842564}
+    - targetCorrespondingSourceObject: {fileID: 3289541653539318884, guid: de869fb3cce6d524a83a671788da3498, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1719874734}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de869fb3cce6d524a83a671788da3498, type: 3}
 --- !u!1 &1812715302
