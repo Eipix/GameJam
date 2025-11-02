@@ -47,7 +47,7 @@ namespace Gameplay
             _navMeshAgent.stoppingDistance = stoppingDistance;
             _navMeshAgent.baseOffset = 1f;
             //_navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
-            _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+            //_navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
             _navMeshAgent.avoidancePriority = 0;
             _navMeshAgent.radius = 0.5f;
 

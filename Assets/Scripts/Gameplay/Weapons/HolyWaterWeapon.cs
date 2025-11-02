@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Gameplay.Projectiles;
 
 namespace Gameplay.Weapons
 {
     public class HolyWaterWeapon : MonoBehaviour
     {
+        public event Action OnAttack;
+        
         [SerializeField] private HolyWaterProjectile projectilePrefab;
         [SerializeField] private Transform firePoint;
         [SerializeField] private float cooldown = 2f;
@@ -12,8 +15,7 @@ namespace Gameplay.Weapons
         [SerializeField] private float projectileSpeed = 10f;
 
         [SerializeField] private Camera playerCamera;
-
-		[SerializeField] private Transform groundLevel;
+        [SerializeField] private Transform groundLevel;
 
         private float _nextFireTime;
 
@@ -23,6 +25,7 @@ namespace Gameplay.Weapons
             {
                 Debug.Log("Holy Water Fired");
                 Fire();
+                OnAttack?.Invoke();
                 _nextFireTime = Time.time + cooldown;
             }
         }
@@ -52,16 +55,5 @@ namespace Gameplay.Weapons
 
             return ray.origin + ray.direction * 50f;
         }
-        
-        // private Vector3 GetMousePosition()
-        // {
-        //     Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        //     if (Physics.Raycast(ray, out RaycastHit hit))
-        //     {
-        //         return hit.point;
-        //     }
-        //
-        //     return Vector3.zero;
-        // }
     }
 }
