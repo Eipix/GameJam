@@ -7,6 +7,7 @@ namespace Gameplay.Projectiles
         [SerializeField] private float explosionRadius = 3f;
         [SerializeField] private AnimationCurve arcCurve = AnimationCurve.Linear(0, 0, 1, 1);
         [SerializeField] private float arcHeight = 2f;
+        [SerializeField] private Puddle puddlePrefab;
         
         private Vector3 startPosition;
         private Vector3 targetPosition;
@@ -48,8 +49,23 @@ namespace Gameplay.Projectiles
            
         }
 
+        private void CreatPuddle()
+        {
+            RaycastHit hit;
+            Vector3 position = transform.position;
+            
+            if (Physics.Raycast(position, Vector3.down, out hit))
+            {
+                hit.point = new Vector3(hit.point.x, hit.point.y + 0.05f, hit.point.z);
+                
+                var puddle =  Instantiate(puddlePrefab, hit.point, Quaternion.identity );
+                puddle.Init(2);
+            }
+        }
+        
         private void DealAreaDamage()
         {
+            CreatPuddle();
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
             Debug.Log(hitColliders.Length);
             foreach (var hitCollider in hitColliders)

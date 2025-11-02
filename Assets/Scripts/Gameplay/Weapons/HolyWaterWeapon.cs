@@ -12,7 +12,7 @@ namespace Gameplay.Weapons
         [SerializeField] private float projectileSpeed = 10f;
 
         [SerializeField] private Camera playerCamera;
-
+        
         private float _nextFireTime;
 
         private void Update()
