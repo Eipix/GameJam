@@ -9364,6 +9364,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45518fa5970c0144a8ac0f52382e79c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 3054279940182447908, guid: af1edd0664366ef408a23fe6c408f4be, type: 3}
+  holdPoint: {fileID: 1724549221}
+  cooldown: 2
+  damage: 8
+  projectileSpeed: 20
+  playerCamera: {fileID: 1404018186}
+  audioSource: {fileID: 0}
+  throwSound: {fileID: 8300000, guid: fe470a34f9811114784c336a30e019f0, type: 3}
+  throwVolume: 1
   _progressBar: {fileID: 1103508270}
   _particlePrefab: {fileID: 3945418913054425638, guid: e1bf69a5c9963e845a35a231bb3697f0, type: 3}
   _particleSpawnedCount: 5
@@ -12188,6 +12197,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7274375620325910649, guid: 82c13304187dbda4c9b2f1a1238a161a, type: 3}
+      propertyPath: breakSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 030b12cc36d699c47bab2203feba36ef, type: 3}
+    - target: {fileID: 7274375620325910649, guid: 82c13304187dbda4c9b2f1a1238a161a, type: 3}
+      propertyPath: breakVolume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274375620325910649, guid: 82c13304187dbda4c9b2f1a1238a161a, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1404018186}
@@ -12280,6 +12297,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6585648243846794744, guid: de869fb3cce6d524a83a671788da3498, type: 3}
+      propertyPath: DamageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2ec0a87f1f7bf604da6efebfac0e4777, type: 3}
     - target: {fileID: 8146935202894029624, guid: de869fb3cce6d524a83a671788da3498, type: 3}
       propertyPath: weapons.Array.size
       value: 2

@@ -8,7 +8,11 @@ namespace Gameplay.Projectiles
         [SerializeField] private AnimationCurve arcCurve = AnimationCurve.Linear(0, 0, 1, 1);
         [SerializeField] private float arcHeight = 2f;
         [SerializeField] private Puddle puddlePrefab;
-        
+
+        [Header("Настройка звука")]
+        [SerializeField] private AudioClip breakSound;
+        [SerializeField][Range(0f, 1f)] private float breakVolume = 1f;
+
         private Vector3 startPosition;
         private Vector3 targetPosition;
         private float travelTime;
@@ -65,6 +69,7 @@ namespace Gameplay.Projectiles
         
         private void DealAreaDamage()
         {
+            PlayBreakSound();
             CreatPuddle();
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
             Debug.Log(hitColliders.Length);
@@ -75,6 +80,15 @@ namespace Gameplay.Projectiles
                     health.TakeDamage(damage, gameObject);
                     Debug.Log(health.CurrentHealth);
                 }
+            }
+        }
+
+        private void PlayBreakSound()
+        {
+            if (breakSound != null)
+            {
+                // Воспроизводим звук в позиции разбития
+                AudioSource.PlayClipAtPoint(breakSound, transform.position, breakVolume);
             }
         }
     }

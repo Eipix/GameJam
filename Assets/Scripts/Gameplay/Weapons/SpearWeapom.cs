@@ -12,6 +12,11 @@ namespace Gameplay.Weapons
         [SerializeField] private float projectileSpeed = 20f;
         [SerializeField] private Camera playerCamera;
 
+        [Header("Звуки")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip throwSound; // Звук броска
+        [SerializeField] private float throwVolume = 1f;
+
         private float _nextFireTime;
         private SpearProjectile _currentSpear;
         private bool _hasSpearInHand = true;
@@ -20,6 +25,16 @@ namespace Gameplay.Weapons
         private void Start()
         {
             _throwHeight = holdPoint.position.y;
+
+            if (audioSource == null)
+            {
+                audioSource = GetComponent<AudioSource>();
+                if (audioSource == null)
+                {
+                    audioSource = gameObject.AddComponent<AudioSource>();
+                }
+            }
+
             CreateSpearInHand();
         }
 
@@ -38,7 +53,6 @@ namespace Gameplay.Weapons
             _hasSpearInHand = false;
 
             Vector3 targetPosition = GetMousePosition();
-            // Фиксируем высоту броска
             targetPosition.y = _throwHeight;
 
             Vector3 direction = (targetPosition - holdPoint.position).normalized;
@@ -46,6 +60,8 @@ namespace Gameplay.Weapons
             float distance = Vector3.Distance(holdPoint.position, targetPosition);
             float lifetime = distance / projectileSpeed + 1f;
 
+
+            PlayThrowSound();
 
             _currentSpear.transform.SetParent(null);
 
@@ -60,6 +76,19 @@ namespace Gameplay.Weapons
             _currentSpear.OnSpearHitEnemy += HandleSpearHitEnemy;
 
             Invoke(nameof(RespawnSpear), cooldown);
+        }
+
+        private void PlayThrowSound()
+        {
+            if (throwSound != null && audioSource != null) 
+            {
+                audioSource.PlayOneShot(throwSound, throwVolume);
+            }
+            else if (throwSound != null)
+            {
+                // Запасной вариант если audioSource не работает
+                AudioSource.PlayClipAtPoint(throwSound, transform.position, throwVolume);
+            }
         }
 
         private void HandleSpearStuck()
@@ -115,7 +144,6 @@ namespace Gameplay.Weapons
                 return ray.GetPoint(distance);
             }
 
-            // Если не попали в плоскость, используем точку на фиксированной высоте
             return ray.origin + ray.direction * 50f;
         }
     }
