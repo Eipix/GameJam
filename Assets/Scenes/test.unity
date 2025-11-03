@@ -4289,7 +4289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db529f345ffd0a840822c3a4743c024a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 6
+  _damage: 20
 --- !u!1 &649822650
 GameObject:
   m_ObjectHideFlags: 0
@@ -13316,6 +13316,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8546353272547221023, guid: a34af0a367e012544a5834b718c43fcf, type: 3}
+      propertyPath: _maxProgress
+      value: 1700
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14118,6 +14122,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7274375620325910649, guid: 82c13304187dbda4c9b2f1a1238a161a, type: 3}
+      propertyPath: damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274375620325910649, guid: 82c13304187dbda4c9b2f1a1238a161a, type: 3}
+      propertyPath: cooldown
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274375620325910649, guid: 82c13304187dbda4c9b2f1a1238a161a, type: 3}
       propertyPath: breakSound
       value: 
       objectReference: {fileID: 8300000, guid: 030b12cc36d699c47bab2203feba36ef, type: 3}
@@ -14307,6 +14319,10 @@ PrefabInstance:
     - target: {fileID: 2168221747863270440, guid: f36915c11955d604a90bce59d122f355, type: 3}
       propertyPath: m_Name
       value: Spear
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559412929862121427, guid: f36915c11955d604a90bce59d122f355, type: 3}
+      propertyPath: damage
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2559412929862121427, guid: f36915c11955d604a90bce59d122f355, type: 3}
       propertyPath: cooldown
