@@ -4,7 +4,7 @@ using System;
 
 public class DraculasCloak : Item
 {
-    private readonly float _speedMultiplier = 2f;
+    private readonly float _speedMultiplier = 1.5f;
     private readonly float _invincibilityAndSpeedDuration = 5f;
 
     protected override void OnPlayerEnter(Player player)
