@@ -8321,28 +8321,22 @@ MonoBehaviour:
   waves:
   - <Cutscene>k__BackingField: {fileID: 1573673563}
     enemyPrefabs:
-    - {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
-    - {fileID: 8345202867225419560, guid: c7dfef7c2a3fad54e83b1a8f6d4ed6f4, type: 3}
     - {fileID: 8345202867225419560, guid: 531d09b25c0eaae43b7396be740b7489, type: 3}
-    - {fileID: 8345202867225419560, guid: 0d9a4823f9721f34ea4b24ea501c127b, type: 3}
-    maxEnemies: 1
-    bossPrefab: {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
+    - {fileID: 8345202867225419560, guid: c7dfef7c2a3fad54e83b1a8f6d4ed6f4, type: 3}
+    maxEnemies: 54
+    bossPrefab: {fileID: 8345202867225419560, guid: de3b9605a73f3f4479f22fa073a73a89, type: 3}
   - <Cutscene>k__BackingField: {fileID: 1647684165}
     enemyPrefabs:
     - {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
-    - {fileID: 8345202867225419560, guid: 531d09b25c0eaae43b7396be740b7489, type: 3}
-    - {fileID: 8345202867225419560, guid: c7dfef7c2a3fad54e83b1a8f6d4ed6f4, type: 3}
-    - {fileID: 8345202867225419560, guid: 0d9a4823f9721f34ea4b24ea501c127b, type: 3}
-    maxEnemies: 1
-    bossPrefab: {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
+    - {fileID: 8345202867225419560, guid: 30633c0908a18f24498615ea2cd6b944, type: 3}
+    maxEnemies: 68
+    bossPrefab: {fileID: 8345202867225419560, guid: fd07208dfdd99a1419d5af499813b4fd, type: 3}
   - <Cutscene>k__BackingField: {fileID: 726112127}
     enemyPrefabs:
-    - {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
-    - {fileID: 8345202867225419560, guid: 531d09b25c0eaae43b7396be740b7489, type: 3}
-    - {fileID: 8345202867225419560, guid: c7dfef7c2a3fad54e83b1a8f6d4ed6f4, type: 3}
     - {fileID: 8345202867225419560, guid: 0d9a4823f9721f34ea4b24ea501c127b, type: 3}
-    maxEnemies: 1
-    bossPrefab: {fileID: 8345202867225419560, guid: 60dd4e99d30d69f43845923d23de7dc8, type: 3}
+    - {fileID: 8345202867225419560, guid: a3355adb64ef24c43b0ec58679a65332, type: 3}
+    maxEnemies: 91
+    bossPrefab: {fileID: 8345202867225419560, guid: f75460c4b27f2e842b4594cd15e4394a, type: 3}
   maxActiveEnemies: 15
   spawnDistanceMin: 10
   spawnDistanceMax: 20
