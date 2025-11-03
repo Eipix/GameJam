@@ -50,7 +50,7 @@ namespace Gameplay
         public void SetMaxHealth(float maxHealth)
         {
             _maxHealth = maxHealth;
-            CurrentHealth = maxHealth;
+            Heal(maxHealth);
         }
         
         public void TakeDamage(float damage, GameObject damageSource)
