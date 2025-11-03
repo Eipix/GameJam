@@ -29,7 +29,7 @@ namespace Gameplay
         [Header("Sprite Settings")]
         [SerializeField] private float damageSpriteDuration = 0.5f;
         [SerializeField] private float attackSpriteDuration = 0.3f;
-
+        
         private Rigidbody _rigidbody;
         private SpriteRenderer _spriteRenderer;
         private Coroutine _spriteCoroutine;
@@ -82,6 +82,8 @@ namespace Gameplay
 
         private void OnWaveEnded(int waveIndex)
         {
+            _health.Heal(_health.MaxHealth);
+            
             if(waveIndex < weapons.Count)
             {
                 weapons[waveIndex].SetActive(false);
