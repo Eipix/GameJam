@@ -188,10 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87058022b2db80c4b8e42f3ff605e2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _score: 10
+  _score: 5
   moveSpeed: 3.5
   stoppingDistance: 1.9
-  attackDamage: 1
+  attackDamage: 3
   attackRange: 2
   attackCooldown: 1
   attackTiltAngle: 30
@@ -233,10 +233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60325234b47f7304d94b88a05e0d96b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
+  _maxHealth: 75
   DamageSound: {fileID: 8300000, guid: 06e4d245ed947824aaca4ddd34e806b5, type: 3}
   DamageVolume: 0.1
   audioSource: {fileID: 0}
+  soundCooldown: 0.1
 --- !u!136 &8538860238794707499
 CapsuleCollider:
   m_ObjectHideFlags: 0
