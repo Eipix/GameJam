@@ -25,10 +25,34 @@ namespace Gameplay
         [SerializeField] private float dayIntensity = 1f;
         [SerializeField] private Vector3 dayRotation = new Vector3(50f, -30f, 0f);
 
+        [Header("Зонтик")]
+        [SerializeField] private GameObject umbrellaPrefab;
+        [SerializeField] private bool enableUmbrella = true;
+
+        private Umbrella _umbrella;
         private void Start()
         {
             SetNightImmediate();
             _spawner.WaveEnded += OnWaveEnded;
+            CreateUmbrella();
+        }
+
+        private void CreateUmbrella()
+        {
+            if (!enableUmbrella || umbrellaPrefab == null)
+            {
+                return;
+            }
+
+            GameObject umbrellaObj = Instantiate(umbrellaPrefab);
+            _umbrella = umbrellaObj.GetComponent<Umbrella>();
+
+            if (_umbrella == null)
+            {
+                _umbrella = umbrellaObj.AddComponent<Umbrella>();
+            }
+
+            umbrellaObj.name = "PlayerUmbrella";
         }
 
         private void OnDestroy()
@@ -48,6 +72,15 @@ namespace Gameplay
             else if (waveIndex == 1) // После второй волны - день
             {
                 SetDay();
+                if (_umbrella != null)
+                {
+                    GameObject player = GameObject.FindGameObjectWithTag("Player");
+                    if (player != null)
+                    {
+                        _umbrella.SetTarget(player.transform);
+                    }
+                    _umbrella.ShowUmbrella();
+                }
             }
         }
 

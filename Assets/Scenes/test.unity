@@ -13403,6 +13403,8 @@ MonoBehaviour:
   dayColor: {r: 1, g: 0.96, b: 0.84, a: 1}
   dayIntensity: 1
   dayRotation: {x: 50, y: -30, z: 0}
+  umbrellaPrefab: {fileID: 28100471198839491, guid: 6346afbf06a906041a80971485c8d4fd, type: 3}
+  enableUmbrella: 1
 --- !u!1 &2043625542
 GameObject:
   m_ObjectHideFlags: 0
