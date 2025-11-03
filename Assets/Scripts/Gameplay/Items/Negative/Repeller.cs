@@ -10,7 +10,7 @@ public class Repeller : Item
 
     protected override void OnPlayerEnter(Player player)
     {
-        var activeParticles = ExperienceFactory.Instance.ActiveParticles.ToList();
+        var activeParticles = ExperienceFactory.ActiveParticles.ToList();
 
         RepelFromPoint(activeParticles, player.transform.position);
 

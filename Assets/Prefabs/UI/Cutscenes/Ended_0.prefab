@@ -1077,7 +1077,7 @@ GameObject:
   - component: {fileID: 1457625140805699361}
   - component: {fileID: 8679802926786461428}
   m_Layer: 5
-  m_Name: Ended_Cutscene_1
+  m_Name: Ended_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,6 +13,8 @@ namespace Gameplay
         public const float MinSpeed = 1.0f;
         public readonly float DefaultSpeed = 5f;
 
+        [SerializeField] private EnemySpawner _spawner;
+
         [Header("Movement Settings")]
         [SerializeField] private float moveSpeed = 5f;
 
@@ -43,8 +45,8 @@ namespace Gameplay
             _rigidbody = GetComponent<Rigidbody>();
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             _health = GetComponent<Health>();
-            
-            EnemySpawner.Instance.WaveEnded += OnWaveEnded;
+
+            _spawner.WaveEnded += OnWaveEnded;
             _health.OnDamaged += OnDamaged;
             
             HolyWaterWeapon holyWaterWeapon = null;
@@ -146,7 +148,7 @@ namespace Gameplay
 
         private void OnDestroy()
         {
-            EnemySpawner.Instance.WaveEnded -= OnWaveEnded;
+            _spawner.WaveEnded -= OnWaveEnded;
             _health.OnDamaged -= OnDamaged;
             
             var holyWaterWeapon = GetComponentInChildren<Weapons.HolyWaterWeapon>();

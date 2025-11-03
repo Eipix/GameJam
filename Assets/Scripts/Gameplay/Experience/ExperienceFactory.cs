@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExperienceFactory : Singleton<ExperienceFactory>
+public class ExperienceFactory : MonoBehaviour
 {
     [SerializeField] private UIProgressBar _progressBar;
     [SerializeField] private ExperienceParticle _particlePrefab;
@@ -12,6 +12,15 @@ public class ExperienceFactory : Singleton<ExperienceFactory>
     private List<ExperienceParticle> _activeParticles = new();
 
     public IReadOnlyList<ExperienceParticle> ActiveParticles => _activeParticles;
+
+    public void Restart()
+    {
+        for (int i = _activeParticles.Count - 1; i >= 0; i--)
+        {
+            Destroy(_activeParticles[i].gameObject);
+        }
+        _activeParticles.Clear();
+    }
 
     public IReadOnlyList<ExperienceParticle> Spawn(Transform transform, int score)
     {

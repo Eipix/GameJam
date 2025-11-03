@@ -23,6 +23,14 @@ public class UIProgressBar : MonoBehaviour
         _fill.anchoredPosition = new Vector2(0, value);
     }
 
+    public void Restart()
+    {
+        _filling.Complete();
+        CurrentProgress = MaxProgress;
+        var fillRect = (RectTransform)_fill.transform;
+        fillRect.anchoredPosition = Vector2.zero;
+    }
+
     public Tween DOFill(int decreasing)
     {
         if (_filling != null && _filling.IsActive())

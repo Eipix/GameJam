@@ -29,6 +29,9 @@ namespace Gameplay
         [Header("Components")]
         [SerializeField] private SpriteRenderer spriteRenderer;
 
+        private ExperienceFactory _experienceFactory;
+        private ItemFactory _itemFactory;
+
         private NavMeshAgent _navMeshAgent;
         private Health _health;
         private Vector3 _lastPosition;
@@ -55,9 +58,11 @@ namespace Gameplay
             _lastPosition = transform.position;
         }
 
-        public void Init(Transform character)
+        public void Init(Transform character, ExperienceFactory experience, ItemFactory item)
         {
             target = character;
+            _experienceFactory = experience;
+            _itemFactory = item;
         }
 
         void Update()
@@ -135,8 +140,9 @@ namespace Gameplay
 
         void HandleDeath()
         {
-            ItemFactory.Instance.TrySpawnRandom(transform.position, out Item item);
-            ExperienceFactory.Instance.Spawn(transform, _score);
+            _itemFactory.TrySpawnRandom(transform.position, out Item item);
+            _experienceFactory.Spawn(transform, _score);
+
             _navMeshAgent.isStopped = true;
             enabled = false;
             Destroy(gameObject);

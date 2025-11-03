@@ -5,7 +5,7 @@ public class Magnet : Item
 {
     protected override void OnPlayerEnter(Player player)
     {
-        var activeParticles = ExperienceFactory.Instance.ActiveParticles.ToList();
+        var activeParticles = ExperienceFactory.ActiveParticles.ToList();
 
         foreach (var particle in activeParticles)
         {

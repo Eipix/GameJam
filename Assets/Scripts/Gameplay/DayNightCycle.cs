@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public class DayNightCycle : Singleton<DayNightCycle>
+    public class DayNightCycle : MonoBehaviour
     {
+        [SerializeField] private EnemySpawner _spawner;
         [SerializeField] private Light directionalLight;
         [SerializeField] private float transitionDuration = 2f;
 
@@ -27,14 +28,14 @@ namespace Gameplay
         private void Start()
         {
             SetNightImmediate();
-            EnemySpawner.Instance.WaveEnded += OnWaveEnded;
+            _spawner.WaveEnded += OnWaveEnded;
         }
 
         private void OnDestroy()
         {
-            if (EnemySpawner.Instance)
+            if (_spawner)
             {
-                EnemySpawner.Instance.WaveEnded -= OnWaveEnded;
+                _spawner.WaveEnded -= OnWaveEnded;
             }
         }
 

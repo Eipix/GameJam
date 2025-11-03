@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 namespace Gameplay
 {
-    public class EnemySpawner : Singleton<EnemySpawner>
+    public class EnemySpawner : MonoBehaviour
     {
         public delegate void WaveEndedHandler(int waveIndex);
         public event WaveEndedHandler WaveEnded;
@@ -20,6 +20,9 @@ namespace Gameplay
             public Enemy bossPrefab;
         }
 
+        [SerializeField] private ExperienceFactory _experienceFactory;
+        [SerializeField] private ItemFactory _itemFactory;
+
         [SerializeField] private List<Wave> waves = new List<Wave>();
         [SerializeField] private int maxActiveEnemies = 15;
         [SerializeField] private float spawnDistanceMin = 10f;
@@ -29,6 +32,7 @@ namespace Gameplay
 
         private int currentWaveIndex = 0;
         private int enemiesSpawnedInWave = 0;
+
         private List<Enemy> activeEnemies = new List<Enemy>();
 
         private void Start()
@@ -43,6 +47,18 @@ namespace Gameplay
 
             wave.Cutscene.Launch();
             wave.Cutscene.Ended += SpawnInitialEnemies;
+        }
+
+        public void Restart()
+        {
+            for (int i = activeEnemies.Count - 1; i >= 0; i--)
+            {
+                Destroy(activeEnemies[i].gameObject);
+            }
+            activeEnemies.Clear();
+
+            currentWaveIndex = 0;
+            enemiesSpawnedInWave = 0;
         }
 
         private void SpawnInitialEnemies()
@@ -82,7 +98,7 @@ namespace Gameplay
             {
                 var prefab = GetRandomEnemyFromWave(currentWave);
                 Enemy enemy = Instantiate(prefab, spawnPosition, Quaternion.identity);
-                enemy.Init(player);
+                enemy.Init(player, _experienceFactory, _itemFactory);
                 activeEnemies.Add(enemy);
                 enemiesSpawnedInWave++;
 
@@ -99,7 +115,7 @@ namespace Gameplay
             if (FindValidSpawnPosition(out var spawnPosition))
             {
                 Enemy boss = Instantiate(currentWave.bossPrefab, spawnPosition, Quaternion.identity);
-                boss.Init(player);
+                boss.Init(player, _experienceFactory, _itemFactory);
                 activeEnemies.Add(boss);
 
                 Health health = boss.GetComponent<Health>();

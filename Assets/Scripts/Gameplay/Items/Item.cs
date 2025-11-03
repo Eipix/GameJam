@@ -9,6 +9,10 @@ public abstract class Item : MonoBehaviour
 
     private Collider _collider;
 
+    protected ExperienceFactory ExperienceFactory { get; private set; }
+
+    public void Init(ExperienceFactory factory) => ExperienceFactory = factory;
+
     private void Awake()
     {
         _collider = GetComponent<Collider>();
