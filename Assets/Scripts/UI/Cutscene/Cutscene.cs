@@ -46,6 +46,7 @@ public class Cutscene : MonoBehaviour, IPointerClickHandler
     public void Launch()
     {
         Init();
+        Time.timeScale = 0f;
         _frames[0].gameObject.SetActive(true);
     }
 
@@ -61,7 +62,7 @@ public class Cutscene : MonoBehaviour, IPointerClickHandler
             _previousIndex = 0;
 
             gameObject.SetActive(false);
-
+            Time.timeScale = 1f;
             Ended?.Invoke();
         }
         else

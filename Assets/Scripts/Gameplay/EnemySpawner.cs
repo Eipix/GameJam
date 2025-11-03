@@ -20,6 +20,7 @@ namespace Gameplay
             public Enemy bossPrefab;
         }
 
+        [SerializeField] public Cutscene Begin;
         [SerializeField] private ExperienceFactory _experienceFactory;
         [SerializeField] private ItemFactory _itemFactory;
 
@@ -37,28 +38,15 @@ namespace Gameplay
 
         private void Start()
         {
-            var wave = waves[currentWaveIndex];
+            StartCutscene(Begin);
 
-            if(wave.Cutscene is null)
+            WaveEnded += waveIndex => StartCutscene(waves[waveIndex].Cutscene);
+
+            void StartCutscene(Cutscene cutscene)
             {
-                SpawnInitialEnemies();
-                return;
+                cutscene.Launch();
+                cutscene.Ended += SpawnInitialEnemies;
             }
-
-            wave.Cutscene.Launch();
-            wave.Cutscene.Ended += SpawnInitialEnemies;
-        }
-
-        public void Restart()
-        {
-            for (int i = activeEnemies.Count - 1; i >= 0; i--)
-            {
-                Destroy(activeEnemies[i].gameObject);
-            }
-            activeEnemies.Clear();
-
-            currentWaveIndex = 0;
-            enemiesSpawnedInWave = 0;
         }
 
         private void SpawnInitialEnemies()
