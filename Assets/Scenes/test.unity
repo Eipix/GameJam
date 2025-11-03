@@ -13403,7 +13403,7 @@ MonoBehaviour:
   dayColor: {r: 1, g: 0.96, b: 0.84, a: 1}
   dayIntensity: 1
   dayRotation: {x: 50, y: -30, z: 0}
-  umbrellaPrefab: {fileID: 28100471198839491, guid: 6346afbf06a906041a80971485c8d4fd, type: 3}
+  umbrellaPrefab: {fileID: 0}
   enableUmbrella: 1
 --- !u!1 &2043625542
 GameObject:
@@ -14307,6 +14307,10 @@ PrefabInstance:
     - target: {fileID: 2168221747863270440, guid: f36915c11955d604a90bce59d122f355, type: 3}
       propertyPath: m_Name
       value: Spear
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559412929862121427, guid: f36915c11955d604a90bce59d122f355, type: 3}
+      propertyPath: cooldown
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2559412929862121427, guid: f36915c11955d604a90bce59d122f355, type: 3}
       propertyPath: playerCamera
