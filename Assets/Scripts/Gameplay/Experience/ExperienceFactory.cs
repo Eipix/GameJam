@@ -22,8 +22,11 @@ public class ExperienceFactory : MonoBehaviour
         _activeParticles.Clear();
     }
 
-    public IReadOnlyList<ExperienceParticle> Spawn(Transform transform, int score)
+    public IReadOnlyList<ExperienceParticle>? Spawn(Transform transform, int score)
     {
+        if (score <= 0)
+            return null;
+
         List<ExperienceParticle> particles = new();
 
         int baseValue = score / _particleSpawnedCount;     // Основное значение (целая часть)
