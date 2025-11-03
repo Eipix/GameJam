@@ -140,10 +140,12 @@ namespace Gameplay
             float vertical = Input.GetAxisRaw("Vertical");
 
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-            Vector3 movement = direction * moveSpeed;
+    
 
-            _rigidbody.velocity = new Vector3(movement.x, 0f, movement.z);
+            Vector3 newPosition = _rigidbody.position + direction * (moveSpeed * Time.fixedDeltaTime);
+            _rigidbody.MovePosition(newPosition);
         }
+
 
         private void FlipSprite(float horizontal)
         {

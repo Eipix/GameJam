@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3397959225927637904}
+  - component: {fileID: 1860502019014207603}
   m_Layer: 0
   m_Name: Scythe
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 4303452289391891186}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1860502019014207603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3317357677981483803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0afdd970cb75b8841be8089807537e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 360
 --- !u!1 &5494172990264353598
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +59,6 @@ GameObject:
   - component: {fileID: 2198840984576087833}
   - component: {fileID: 3686788002677529932}
   - component: {fileID: 3248864304966750459}
-  - component: {fileID: 2874846191467021996}
   m_Layer: 0
   m_Name: Scythe
   m_TagString: Untagged
@@ -61,9 +74,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5494172990264353598}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.764, z: 2.735}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.764, z: 2.11}
+  m_LocalScale: {x: 0.8188, y: 0.8188, z: 0.8188}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3397959225927637904}
@@ -75,7 +88,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5494172990264353598}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 8611070336780836960, guid: 3bcab1b53e758234dbe1650e79b74459, type: 3}
 --- !u!23 &2198840984576087833
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -96,7 +109,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3f4a70aa067c5bc4285b54109158cef1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -133,12 +146,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.2862247, y: 0.28657514, z: 2.0081434}
+  m_Center: {x: 0.14311236, y: 0.0056326687, z: 0.31970716}
 --- !u!1818360609 &3248864304966750459
 RotationConstraint:
   m_ObjectHideFlags: 0
@@ -157,17 +170,3 @@ RotationConstraint:
   m_Active: 1
   m_IsLocked: 1
   m_Sources: []
---- !u!114 &2874846191467021996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5494172990264353598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c443c03eab420484dac7dbfbf8493402, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 360
-  centerTransform: {fileID: 0}

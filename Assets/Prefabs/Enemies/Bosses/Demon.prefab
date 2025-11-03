@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 5746660443294052467}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.12591343, y: 0.12591341, z: 0.12591343}
+  m_LocalPosition: {x: 0, y: 0.58, z: 0}
+  m_LocalScale: {x: 0.4608443, y: 0.46084428, z: 0.4608443}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8578552179612286274}
@@ -74,12 +74,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1b54724916abcbe4ba1747db661c40e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bd47c4b30133e54d838789c24f37704, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 54.16, y: 78.49941}
+  m_Size: {x: 7.737143, y: 11.214203}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -110,8 +110,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.24805552
-      value: 0.08655763
+      time: 0.26638895
+      value: 0.059538126
       inSlope: 0.0014056612
       outSlope: 0.0014056612
       tangentMode: 0
@@ -119,8 +119,8 @@ MonoBehaviour:
       inWeight: 0.7028647
       outWeight: 0.37585565
     - serializedVersion: 3
-      time: 0.7768181
-      value: -0.080678396
+      time: 0.7607735
+      value: -0.049322736
       inSlope: -0.000059395166
       outSlope: -0.000059395166
       tangentMode: 0
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 8538860238794707499}
   - component: {fileID: 2301006036132109115}
   m_Layer: 0
-  m_Name: Ghoust
+  m_Name: Demon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,10 +233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60325234b47f7304d94b88a05e0d96b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
+  _maxHealth: 200
   DamageSound: {fileID: 8300000, guid: 06e4d245ed947824aaca4ddd34e806b5, type: 3}
   DamageVolume: 0.1
   audioSource: {fileID: 0}
+  soundCooldown: 0.1
 --- !u!136 &8538860238794707499
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -256,8 +257,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.50000006
-  m_Height: 2
+  m_Radius: 0.85
+  m_Height: 3.3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2301006036132109115

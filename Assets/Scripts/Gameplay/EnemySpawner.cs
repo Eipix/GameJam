@@ -10,7 +10,7 @@ namespace Gameplay
     {
         public delegate void WaveEndedHandler(int waveIndex);
         public event WaveEndedHandler WaveEnded;
-        
+
         [System.Serializable]
         public class Wave
         {
@@ -31,8 +31,9 @@ namespace Gameplay
         [SerializeField] private int maxSpawnAttempts = 10;
         [SerializeField] private Transform player;
 
-        private int currentWaveIndex = 0;
+        private int currentWaveIndex = -1;
         private int enemiesSpawnedInWave = 0;
+        private bool bossSpawned = false;
 
         private List<Enemy> activeEnemies = new List<Enemy>();
 
@@ -45,16 +46,13 @@ namespace Gameplay
             void StartCutscene(Cutscene cutscene)
             {
                 cutscene.Launch();
-                cutscene.Ended += SpawnInitialEnemies;
+                cutscene.Ended += NextWave;
             }
         }
 
         private void SpawnInitialEnemies()
         {
-            for (int i = 0; i < maxActiveEnemies; i++)
-            {
-                TrySpawnEnemy();
-            }
+            BossSpawn();
         }
 
         public void OnEnemyDeath(Enemy enemy)
@@ -62,6 +60,64 @@ namespace Gameplay
             if (activeEnemies.Contains(enemy))
             {
                 activeEnemies.Remove(enemy);
+                TrySpawnEnemy();
+                CheckWaveCompletion();
+            }
+            
+            
+        }
+
+        private void CheckWaveCompletion()
+        {
+            if (currentWaveIndex >= waves.Count)
+                return;
+
+            Wave currentWave = waves[currentWaveIndex];
+
+            if (enemiesSpawnedInWave >= currentWave.maxEnemies && activeEnemies.Count == 0)
+            {
+                WaveEnded?.Invoke(currentWaveIndex);
+                //NextWave();
+            }
+        }
+
+        private void BossSpawn()
+        {
+            if (currentWaveIndex >= waves.Count)
+                return;
+
+            Wave currentWave = waves[currentWaveIndex];
+
+            if (FindValidSpawnPosition(out var spawnPosition))
+            {
+                Enemy boss = Instantiate(currentWave.bossPrefab, spawnPosition, Quaternion.identity);
+                boss.Init(player, _experienceFactory, _itemFactory);
+                activeEnemies.Add(boss);
+                bossSpawned = true;
+
+                Health health = boss.GetComponent<Health>();
+                health.OnDie += () =>
+                {
+                    if (activeEnemies.Contains(boss))
+                    {
+                        activeEnemies.Remove(boss);
+                    }
+
+                    SpawnRegularEnemies();
+                };
+            }
+        }
+
+        private void SpawnRegularEnemies()
+        {
+            if (currentWaveIndex >= waves.Count)
+                return;
+
+            Wave currentWave = waves[currentWaveIndex];
+            int enemiesToSpawn = Mathf.Min(maxActiveEnemies, currentWave.maxEnemies);
+
+            for (int i = 0; i < enemiesToSpawn; i++)
+            {
                 TrySpawnEnemy();
             }
         }
@@ -74,13 +130,7 @@ namespace Gameplay
             Wave currentWave = waves[currentWaveIndex];
 
             if (enemiesSpawnedInWave >= currentWave.maxEnemies)
-            {
-                if (activeEnemies.Count == 0)
-                {
-                    BossSpawn();
-                }
                 return;
-            }
 
             if (FindValidSpawnPosition(out var spawnPosition))
             {
@@ -92,35 +142,9 @@ namespace Gameplay
 
                 Health health = enemy.GetComponent<Health>();
                 health.OnDie += () => OnEnemyDeath(enemy);
-
             }
         }
-        
-        private void BossSpawn()
-        {
-            Wave currentWave = waves[currentWaveIndex];
 
-            if (FindValidSpawnPosition(out var spawnPosition))
-            {
-                Enemy boss = Instantiate(currentWave.bossPrefab, spawnPosition, Quaternion.identity);
-                boss.Init(player, _experienceFactory, _itemFactory);
-                activeEnemies.Add(boss);
-
-                Health health = boss.GetComponent<Health>();
-                health.OnDie += () =>
-                {
-                    if (activeEnemies.Contains(boss))
-                    {
-                        activeEnemies.Remove(boss);
-                    }
-                    
-                    WaveEnded?.Invoke(currentWaveIndex);
-                    NextWave();
-                };
-            }
-            
-        }
-        
         private bool FindValidSpawnPosition(out Vector3 position)
         {
             position = Vector3.zero;
@@ -153,11 +177,12 @@ namespace Gameplay
             int index = Random.Range(0, wave.enemyPrefabs.Count);
             return wave.enemyPrefabs[index];
         }
-        
+
         private void NextWave()
         {
             currentWaveIndex++;
             enemiesSpawnedInWave = 0;
+            bossSpawned = false;
 
             if (currentWaveIndex < waves.Count)
             {
@@ -166,4 +191,3 @@ namespace Gameplay
         }
     }
 }
-
