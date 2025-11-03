@@ -67,9 +67,9 @@ namespace Gameplay.Projectiles
             _hasHit = true;
 
             // Останавливаем копье
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
+            // rb.velocity = Vector3.zero;
+            // rb.angularVelocity = Vector3.zero;
+            // rb.isKinematic = true;
 
             bool hasHealth = target.TryGetComponent<Health>(out var health);
 
@@ -82,7 +82,7 @@ namespace Gameplay.Projectiles
             }
             else
             {
-                HandleStuckInObject(target);
+                //HandleStuckInObject(target);
                 OnSpearStuck?.Invoke();
             }
         }
