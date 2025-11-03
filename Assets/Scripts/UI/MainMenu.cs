@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Gameplay;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -59,7 +58,7 @@ public class MainMenu : MonoBehaviour
             _exitInfo.Hide();
             _playInfo.Hide();
 
-            gameObject.SetActive(true);
+            _panel.gameObject.SetActive(true);
         });
         _show.Append(_exitInfo.RectTransform.DOAnchorPosY(_exitInfo.TargetPosition.y, _duration));
         _show.Join(_playInfo.RectTransform.DOAnchorPosY(_playInfo.TargetPosition.y, _duration));
@@ -82,10 +81,10 @@ public class MainMenu : MonoBehaviour
     public Sequence Hide()
     {
         if (_hide is not null && _hide.IsActive())
-            _hide.Complete();
+            _hide.Complete(true);
 
         if (_show is not null && _show.IsActive())
-            _show.Complete();
+            _show.Complete(true);
 
         _idleMove.Complete();
 
@@ -93,7 +92,7 @@ public class MainMenu : MonoBehaviour
 
         _hide.Append(_exitInfo.RectTransform.DOAnchorPosY(_exitInfo.HidePosition.y, _duration).SetEase(Ease.OutQuad));
         _hide.Join(_playInfo.RectTransform.DOAnchorPosY(_playInfo.HidePosition.y, _duration).SetEase(Ease.OutQuad));
-        _show.AppendCallback(() => gameObject.SetActive(false));
+        _show.AppendCallback(() => _panel.gameObject.SetActive(true));
 
         return _hide;
     }

@@ -7,12 +7,14 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    [RequireComponent(typeof(Rigidbody), typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Rigidbody), typeof(SpriteRenderer), typeof(Health))]
     public class Player : MonoBehaviour
     {
         public const float MinSpeed = 1.0f;
         public readonly float DefaultSpeed = 5f;
 
+        [SerializeField] private MainMenu _mainMenu;
+        [SerializeField] private Cutscene _gameOverCutscene;
         [SerializeField] private EnemySpawner _spawner;
 
         [Header("Movement Settings")]
@@ -48,6 +50,11 @@ namespace Gameplay
 
             _spawner.WaveEnded += OnWaveEnded;
             _health.OnDamaged += OnDamaged;
+            _health.OnDie += () =>
+            {
+                _gameOverCutscene.Launch();
+                _gameOverCutscene.Ended += () => _mainMenu.Show();
+            };
             
             HolyWaterWeapon holyWaterWeapon = null;
 

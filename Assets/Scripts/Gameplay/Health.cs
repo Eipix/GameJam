@@ -108,6 +108,7 @@ namespace Gameplay
             if (CurrentHealth <= 0f)
             {
                 _isDead = true;
+
                 OnDie?.Invoke();
             }
         }
