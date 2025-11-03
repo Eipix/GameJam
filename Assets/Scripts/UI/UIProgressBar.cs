@@ -51,6 +51,7 @@ public class UIProgressBar : MonoBehaviour
         if (CurrentProgress <= 0)
             MinValueAchieved?.Invoke();
 
+        Debug.LogError($"Progress {CurrentProgress}");
         ValueChanged?.Invoke(CurrentProgress);
 
         return _filling;

@@ -9,6 +9,9 @@ public class Magnet : Item
 
         foreach (var particle in activeParticles)
         {
+            if (particle.IsCollected)
+                continue;
+
             particle.ForceCollect(player);
         }
 
