@@ -30,8 +30,8 @@ public class MainMenu : MonoBehaviour
         _exitInfo = new ButtonInfo(_exit);  
         _playInfo = new ButtonInfo(_play);
 
-        _exit.onClick.AddListener(() => Application.Quit());
-        _play.onClick.AddListener(() =>
+        _play.onClick.AddListener(() => Application.Quit());
+        _exit.onClick.AddListener(() =>
         {
             Time.timeScale = 1;
             var currentSceneName = SceneManager.GetActiveScene().name;
