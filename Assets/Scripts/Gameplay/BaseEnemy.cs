@@ -7,7 +7,7 @@ namespace Gameplay
     [RequireComponent(typeof(NavMeshAgent), typeof(Health))]
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private int _score = 10;
+        [SerializeField, Range(5, 100)] private int _score = 10;
 
         [Header("Movement Settings")]
         [SerializeField] private float moveSpeed = 3.5f;
