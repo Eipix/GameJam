@@ -20,7 +20,8 @@ namespace Gameplay
             public Enemy bossPrefab;
         }
 
-        [SerializeField] public Cutscene Begin;
+        [SerializeField] private MainMenu _mainMenu;
+        [SerializeField] private Cutscene _begin;
         [SerializeField] private ExperienceFactory _experienceFactory;
         [SerializeField] private ItemFactory _itemFactory;
 
@@ -39,7 +40,7 @@ namespace Gameplay
 
         private void Start()
         {
-            StartCutscene(Begin);
+            StartCutscene(_begin);
 
             WaveEnded += waveIndex => StartCutscene(waves[waveIndex].Cutscene);
 
@@ -187,6 +188,10 @@ namespace Gameplay
             if (currentWaveIndex < waves.Count)
             {
                 SpawnInitialEnemies();
+            }
+            else
+            {
+                _mainMenu.Show();
             }
         }
     }
