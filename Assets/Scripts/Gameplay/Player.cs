@@ -29,6 +29,8 @@ namespace Gameplay
         [Header("Sprite Settings")]
         [SerializeField] private float damageSpriteDuration = 0.5f;
         [SerializeField] private float attackSpriteDuration = 0.3f;
+
+        [SerializeField] private float[] MaxHealths = { 390, 350, 250 };
         
         private Rigidbody _rigidbody;
         private SpriteRenderer _spriteRenderer;
@@ -55,6 +57,8 @@ namespace Gameplay
                 _gameOverCutscene.Launch();
                 _gameOverCutscene.Ended += () => _mainMenu.Show();
             };
+
+            _health.SetMaxHealth(MaxHealths[0]);
             
             HolyWaterWeapon holyWaterWeapon = null;
 
@@ -82,7 +86,8 @@ namespace Gameplay
 
         private void OnWaveEnded(int waveIndex)
         {
-            _health.Heal(_health.MaxHealth);
+            var health = MaxHealths[waveIndex];
+            _health.SetMaxHealth(health);
             
             if(waveIndex < weapons.Count)
             {

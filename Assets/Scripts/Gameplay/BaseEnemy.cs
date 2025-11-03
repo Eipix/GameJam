@@ -140,7 +140,9 @@ namespace Gameplay
 
         void HandleDeath()
         {
-            _itemFactory.TrySpawnRandom(transform.position, out Item item);
+            var dropPosition = transform.position;
+            dropPosition.y = 0.6f;
+            _itemFactory.TrySpawnRandom(dropPosition, out Item item);
             _experienceFactory.Spawn(transform, _score);
 
             _navMeshAgent.isStopped = true;

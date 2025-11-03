@@ -16,7 +16,7 @@ namespace Gameplay
         [SerializeField] private float soundCooldown = 0.1f;
 
         private float _lastSoundTime;
-        private static float _globalLastSoundTime; // Статическая переменная для всех экземпляров
+        private static float _globalLastSoundTime; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
         public float MaxHealth => _maxHealth;
 
@@ -47,6 +47,12 @@ namespace Gameplay
             }
         }
 
+        public void SetMaxHealth(float maxHealth)
+        {
+            _maxHealth = maxHealth;
+            CurrentHealth = maxHealth;
+        }
+        
         public void TakeDamage(float damage, GameObject damageSource)
         {
             if (Invincibility)
@@ -68,7 +74,7 @@ namespace Gameplay
 
             float currentTime = Time.time;
 
-            // Проверяем задержки
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             if (currentTime - _lastSoundTime < soundCooldown ||
                 currentTime - _globalLastSoundTime < soundCooldown)
                 return;
