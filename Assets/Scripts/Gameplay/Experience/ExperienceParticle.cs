@@ -24,9 +24,13 @@ public class ExperienceParticle : MonoBehaviour
 
     public int ScorePerParticle { get; private set; }
 
+    public bool IsCollected;
+
     private void Awake()
     {
-        _collider = GetComponent<SphereCollider>();
+        DOTween.SetTweensCapacity(9999, 999);
+
+_collider = GetComponent<SphereCollider>();
         _collider.isTrigger = true;
     }
 
@@ -67,6 +71,7 @@ public class ExperienceParticle : MonoBehaviour
         MoveToPlayer.OnStart(() => Collecting?.Invoke());
         MoveToPlayer.OnComplete(() =>
         {
+            IsCollected = true;
             Collected?.Invoke();
             Destroy(gameObject);
         });
@@ -82,6 +87,6 @@ public class ExperienceParticle : MonoBehaviour
 
     private void OnDestroy()
     {
-        MoveToPlayer?.Kill();
+        MoveToPlayer?.Complete(true);
     }
 }

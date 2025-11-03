@@ -30,7 +30,7 @@ public class ExperienceFactory : MonoBehaviour
         List<ExperienceParticle> particles = new();
 
         int baseValue = score / _particleSpawnedCount;     // Основное значение (целая часть)
-        int remainder = score % _particleSpawnedCount;     // Остаток
+        int remainder = score % _particleSpawnedCount;     // Остаток``````````
 
         SpawnParticle(baseValue + remainder, transform);
 
