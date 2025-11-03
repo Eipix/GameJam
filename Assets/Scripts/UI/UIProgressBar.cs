@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class UIProgressBar : MonoBehaviour
 {
-    public const int MaxProgress = 900;
+    [SerializeField]  public int _maxProgress = 900;
 
     [SerializeField, Range(0.1f, 3f)] private float _fillSpeed = 0.1f;
     [SerializeField] private RectTransform _fill;
@@ -15,7 +15,12 @@ public class UIProgressBar : MonoBehaviour
 
     private Tween _filling;
 
-    public int CurrentProgress { get; private set; } = MaxProgress;
+    public int CurrentProgress { get; private set; } 
+
+    private void Awake()
+    {
+        CurrentProgress = _maxProgress;
+    }
 
     protected void Fill(Vector2 range, float currentValue)
     {
@@ -26,7 +31,7 @@ public class UIProgressBar : MonoBehaviour
     public void Restart()
     {
         _filling.Complete();
-        CurrentProgress = MaxProgress;
+        CurrentProgress = _maxProgress;
         var fillRect = (RectTransform)_fill.transform;
         fillRect.anchoredPosition = Vector2.zero;
     }
@@ -39,7 +44,7 @@ public class UIProgressBar : MonoBehaviour
         CurrentProgress -= Mathf.Max(0, decreasing);
         CurrentProgress = Mathf.Max(0, CurrentProgress);
 
-        float value = GetValue(new Vector2(0, MaxProgress), CurrentProgress);
+        float value = GetValue(new Vector2(0, _maxProgress), CurrentProgress);
 
         _filling = _fill.DOAnchorPosX(value, _fillSpeed); 
 
