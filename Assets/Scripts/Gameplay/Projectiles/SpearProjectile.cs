@@ -61,7 +61,7 @@ namespace Gameplay.Projectiles
 
         protected override void HandleCollider(Collider target)
         {
-            if (_hasHit) return;
+            //if (_hasHit) return;
             if (target.CompareTag("Player")) return;
 
             _hasHit = true;
@@ -72,12 +72,12 @@ namespace Gameplay.Projectiles
             // rb.isKinematic = true;
 
             bool hasHealth = target.TryGetComponent<Health>(out var health);
-
+            
             if (hasHealth && !target.CompareTag("Player"))
             {
                 health.TakeDamage(damage, gameObject);
                 OnSpearHitEnemy?.Invoke();
-                Debug.Log(health.CurrentHealth);
+                //Debug.LogError(health.CurrentHealth);
                 Destroy(gameObject);
             }
             else
