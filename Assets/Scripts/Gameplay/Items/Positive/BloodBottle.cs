@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BloodBottle : Item
 {
-    private readonly float _multiplier = 0.1f;
+    private readonly float _multiplier = 0.25f;
 
     protected override void OnPlayerEnter(Player player)
     {
         if (player.gameObject.TryGetComponent(out Health health) is false)
-            throw new InvalidOperationException($"Игрок должен содержать компонент {nameof(Health)}");
+            throw new InvalidOperationException($"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ {nameof(Health)}");
 
         OnPicked();
         health.Heal(health.CurrentHealth * _multiplier);
