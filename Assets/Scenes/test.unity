@@ -10945,7 +10945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _progressBar: {fileID: 1273423082}
   _particlePrefab: {fileID: 3945418913054425638, guid: e1bf69a5c9963e845a35a231bb3697f0, type: 3}
-  _particleSpawnedCount: 5
+  _maxParticleSpawnedCount: 5
 --- !u!1 &1719010907 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3233775326330391256, guid: 28d90417bc7d3934085a484bdac5edba, type: 3}
@@ -13451,7 +13451,7 @@ MonoBehaviour:
   dayColor: {r: 1, g: 0.96, b: 0.84, a: 1}
   dayIntensity: 1
   dayRotation: {x: 50, y: -30, z: 0}
-  umbrellaPrefab: {fileID: 0}
+  umbrellaPrefab: {fileID: 28100471198839491, guid: 6346afbf06a906041a80971485c8d4fd, type: 3}
   enableUmbrella: 1
 --- !u!1 &2043625542
 GameObject:
