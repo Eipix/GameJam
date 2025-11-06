@@ -39,7 +39,7 @@ public class UIProgressBar : MonoBehaviour
     public Tween DOFill(int decreasing)
     {
         if (_filling != null && _filling.IsActive())
-            _filling.Complete(true);
+            _filling.Complete();
 
         CurrentProgress -= Mathf.Max(0, decreasing);
         CurrentProgress = Mathf.Max(0, CurrentProgress);
@@ -50,8 +50,9 @@ public class UIProgressBar : MonoBehaviour
 
         if (CurrentProgress <= 0)
             MinValueAchieved?.Invoke();
+        
+        Debug.LogWarning($"Текущий прогресс {CurrentProgress}");
 
-        Debug.LogError($"Progress {CurrentProgress}");
         ValueChanged?.Invoke(CurrentProgress);
 
         return _filling;

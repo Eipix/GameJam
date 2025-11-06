@@ -22,7 +22,7 @@ public class ExperienceParticle : MonoBehaviour
 
     public Sequence MoveToPlayer { get; private set; }
 
-    public int ScorePerParticle { get; private set; }
+    public int Score { get; private set; }
 
     public bool IsCollected;
 
@@ -37,10 +37,10 @@ _collider = GetComponent<SphereCollider>();
     public void Init(Transform target, UIProgressBar progressBar, int scorePerParticle)
     {
         _progressBar = progressBar;
-        ScorePerParticle = scorePerParticle;
+        Score = scorePerParticle;
 
         if (target.TryGetComponent(out Collider collider) is false)
-            throw new InvalidOperationException($"Target для спавна опыта должен содержать коллайдер!");
+            throw new InvalidOperationException($"Target пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
 
         _target = collider;
         var bounds = _target.bounds;
@@ -58,15 +58,15 @@ _collider = GetComponent<SphereCollider>();
 
     public void ForceCollect(Player player)
     {
+        if (MoveToPlayer != null && MoveToPlayer.IsActive())
+            return;
+        
         if (_fallToFloor != null && _fallToFloor.IsActive())
             _fallToFloor.Complete();
-
-        if (MoveToPlayer != null && MoveToPlayer.IsActive())
-            MoveToPlayer.Complete(true);
-
+        
         MoveToPlayer = DOTween.Sequence();
         MoveToPlayer.Append(transform.DOMove(player.transform.position, _moveToPlayerDuration));
-        MoveToPlayer.Append(_progressBar.DOFill(ScorePerParticle));
+        MoveToPlayer.Append(_progressBar.DOFill(Score));
 
         MoveToPlayer.OnStart(() => Collecting?.Invoke());
         MoveToPlayer.OnComplete(() =>

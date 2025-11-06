@@ -1,6 +1,7 @@
 using Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ExperienceFactory : MonoBehaviour
@@ -10,17 +11,10 @@ public class ExperienceFactory : MonoBehaviour
     [SerializeField, Range(1, 10)] private int _particleSpawnedCount = 5;
 
     private List<ExperienceParticle> _activeParticles = new();
-
+    
     public IReadOnlyList<ExperienceParticle> ActiveParticles => _activeParticles;
-
-    public void Restart()
-    {
-        for (int i = _activeParticles.Count - 1; i >= 0; i--)
-        {
-            Destroy(_activeParticles[i].gameObject);
-        }
-        _activeParticles.Clear();
-    }
+    
+    public int TotalExperienceOnMap => _activeParticles.Select(particle => particle.Score).Sum();
 
     public IReadOnlyList<ExperienceParticle>? Spawn(Transform transform, int score)
     {
@@ -29,8 +23,8 @@ public class ExperienceFactory : MonoBehaviour
 
         List<ExperienceParticle> particles = new();
 
-        int baseValue = score / _particleSpawnedCount;     // Основное значение (целая часть)
-        int remainder = score % _particleSpawnedCount;     // Остаток``````````
+        int baseValue = score / _particleSpawnedCount;     // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ)
+        int remainder = score % _particleSpawnedCount;     // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ``````````
 
         SpawnParticle(baseValue + remainder, transform);
 
@@ -38,7 +32,9 @@ public class ExperienceFactory : MonoBehaviour
         {
             SpawnParticle(baseValue, transform);
         }
-
+        
+        Debug.LogWarning($"РЅР° РєР°СЂС‚Рµ {TotalExperienceOnMap} РѕРїС‹С‚Р°");
+        
         return particles;
     }
 
